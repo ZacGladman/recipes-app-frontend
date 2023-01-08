@@ -1,7 +1,12 @@
-import { greet } from "./utils/greet";
+import { Route, Routes } from "react-router-dom";
 
 function App(): JSX.Element {
-  return <h1>{greet("World")}</h1>;
+  return (
+    <Routes>
+      <Route path="/" element={<Homepage />}></Route>
+      <Route path="/meal-search" element={<MealSearch />}></Route>
+    </Routes>
+  );
 }
 
 export default App;
