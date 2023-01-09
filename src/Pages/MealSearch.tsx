@@ -88,6 +88,10 @@ export default function MealSearch(): JSX.Element {
         </form>
       )}
       {navSelection === "random" && randomMeal && <p>{randomMeal.strMeal}</p>}
+      {navSelection === "category" &&
+        categories?.categories.map((oneCat) => (
+          <OneCategory category={oneCat} key={oneCat.idCategory} />
+        ))}
     </>
   );
 }
