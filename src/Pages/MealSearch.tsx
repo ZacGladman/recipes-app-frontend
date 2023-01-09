@@ -78,6 +78,22 @@ export default function MealSearch(): JSX.Element {
     console.log(jsonBody.meals);
     setMealsByIngredient(jsonBody);
   }
+
+  const handleSubmitSearch = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (navSelection === "meal-search") {
+      await fetchSearchedMeals(searchInput);
+      console.log("search successful!");
+      console.log(searchedMeals?.meals);
+    } else if (navSelection === "nationality") {
+      console.log("nationality search");
+    } else {
+      console.log("main ingredient search");
+      await fetchByMainIngredient(searchInput);
+    }
+    setSearchInput("");
+  };
+
   return (
     <>
       <nav>
