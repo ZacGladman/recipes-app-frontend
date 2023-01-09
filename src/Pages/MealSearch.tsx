@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
-import Meal, { Ingredient, Nationality } from "../utils/interfaces";
-import IMeals from "../utils/interfaces";
+import Meal from "../utils/interfaces/IMeal";
+import ICategory from "../utils/interfaces/ICategory";
+import INationality from "../utils/interfaces/INationality";
+import OneCategory from "../components/oneCategory";
+import Ingredient from "../utils/interfaces/Ingredient";
+import IMealByIngredient from "../utils/interfaces/IMealByIngredient";
 
 export default function MealSearch(): JSX.Element {
   const [ingredients, setIngredients] = useState<{ meals: Ingredient[] }>();
