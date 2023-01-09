@@ -120,10 +120,8 @@ export default function MealSearch(): JSX.Element {
         navSelection === "main-ingredient" ||
         navSelection === "nationality") && (
         <form
-          onSubmit={(e) => {
-            console.log("search submitted");
-            e.preventDefault();
-            setSearchInput("");
+          onSubmit={async (e) => {
+            await handleSubmitSearch(e);
           }}
         >
           <input
