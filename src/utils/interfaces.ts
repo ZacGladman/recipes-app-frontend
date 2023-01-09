@@ -54,10 +54,6 @@ export default interface Meal {
   dateModified: string | null;
 }
 
-export default interface IMealsIngredientsNationalities {
-  meals: Meal[] | Ingredient[] | Nationality[];
-}
-
 export interface Ingredient {
   idIngredient: string;
   strIngredient: string;
@@ -65,14 +61,14 @@ export interface Ingredient {
   strType: string | null;
 }
 
-export interface Category {
+export default interface ICategory {
   idCategory: string;
   strCategory: string | null;
   strCategoryThumb: string | null;
   strCategoryDescription: string | null;
 }
 export default interface ICategories {
-  categories: Category[];
+  categories: ICategory[];
 }
 
 export interface Nationality {
