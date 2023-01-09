@@ -60,11 +60,13 @@ export default function MealSearch(): JSX.Element {
   }
 
   async function fetchSearchedMeals(search: string) {
-    const response = await fetch(
-      `www.themealdb.com/api/json/v1/1/search.php?s=${search}`
-    );
-    const jsonBody: { meals: Meal[] | null } = await response.json();
-    setSearchedMeals(jsonBody);
+    const endpoint =
+      "https://www.themealdb.com/api/json/v1/1/search.php?s=" + search;
+    console.log(endpoint);
+    const response = await fetch(endpoint);
+    const mealsOrNull: { meals: Meal[] | null } = await response.json();
+    console.log(mealsOrNull);
+    setSearchedMeals(mealsOrNull);
   }
 
   async function fetchByMainIngredient(search: string) {
