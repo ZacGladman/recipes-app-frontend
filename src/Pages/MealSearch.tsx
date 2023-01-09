@@ -46,6 +46,13 @@ export default function MealSearch(): JSX.Element {
     );
     const jsonBody: { meals: Meal[] } = await response.json();
     setRandomMeal(jsonBody.meals[0]);
+  async function fetchSearchedMeals(search: string) {
+    const response = await fetch(
+      `www.themealdb.com/api/json/v1/1/search.php?s=${search}`
+    );
+    const jsonBody: { meals: Meal[] | null } = await response.json();
+    setSearchedMeals(jsonBody);
+  }
     console.log(jsonBody);
   }
   return (
