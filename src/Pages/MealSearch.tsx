@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import Meal from "../utils/interfaces";
+import Meal, { Ingredient, Nationality } from "../utils/interfaces";
 import IMeals from "../utils/interfaces";
+import ICategories from "../utils/interfaces";
 
 export default function MealSearch(): JSX.Element {
-  const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+  const [ingredients, setIngredients] = useState<{ meals: Ingredient[] }>();
   const [categories, setCategories] = useState<ICategories>();
-  const [nationalies, setNationalities] = useState<Nationalities>();
+  const [nationalies, setNationalities] = useState<{ meals: Nationality[] }>();
   const [randomMeal, setRandomMeal] = useState<Meal>();
   const [searchInput, setSearchInput] = useState<string>("");
   const [navSelection, setNavSelection] = useState<
@@ -44,8 +45,9 @@ export default function MealSearch(): JSX.Element {
     const response = await fetch(
       "https://www.themealdb.com/api/json/v1/1/random.php"
     );
-    const jsonBody = await response.json();
-    setRandomMeal(jsonBody);
+    const jsonBody: { meals: Meal[] } = await response.json();
+    setRandomMeal(jsonBody.meals[0]);
+    console.log(jsonBody);
   }
   return (
     <>
@@ -60,7 +62,14 @@ export default function MealSearch(): JSX.Element {
         <button onClick={() => setNavSelection("nationality")}>
           nationality
         </button>
-        <button onClick={() => setNavSelection("random")}>random</button>
+        <button
+          onClick={() => {
+            setNavSelection("random");
+            fetchRandomMeal();
+          }}
+        >
+          random
+        </button>
       </nav>
       {(navSelection === "meal-search" ||
         navSelection === "main-ingredient" ||
@@ -79,6 +88,7 @@ export default function MealSearch(): JSX.Element {
           />
         </form>
       )}
+      {navSelection === "random" && randomMeal && <p>{randomMeal.strMeal}</p>}
     </>
   );
 }
