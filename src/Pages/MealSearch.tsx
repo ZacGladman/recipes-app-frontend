@@ -108,9 +108,9 @@ export default function MealSearch(): JSX.Element {
           nationality
         </button>
         <button
-          onClick={() => {
+          onClick={async () => {
             setNavSelection("random");
-            fetchRandomMeal();
+            await fetchRandomMeal();
           }}
         >
           random
