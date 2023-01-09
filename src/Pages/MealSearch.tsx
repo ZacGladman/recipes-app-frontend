@@ -70,27 +70,31 @@ export default function MealSearch(): JSX.Element {
   }
 
   async function fetchByMainIngredient(search: string) {
-    const response = await fetch(
-      `www.themealdb.com/api/json/v1/1/filter.php?i=${search}`
-    );
-    console.log(response);
-    console.log(response.body);
-    const jsonBody = await response.json();
-    console.log(jsonBody);
-    console.log(jsonBody.meals);
-    setMealsByIngredient(jsonBody);
+    const endpoint =
+      "https://www.themealdb.com/api/json/v1/1/filter.php?i=" + search;
+    try {
+      const response = await fetch(endpoint);
+      try {
+        const mealsOrNull: { meals: IMealByIngredient[] | null } =
+          await response.json();
+        setMealsByIngredient(mealsOrNull);
+      } catch (error) {
+        console.log("ERROR IN SECTION TWO!");
+        console.error(error);
+      }
+    } catch (error) {
+      console.log("ERROR IN SECTION 1!");
+      console.error(error);
+    }
   }
 
   const handleSubmitSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (navSelection === "meal-search") {
       await fetchSearchedMeals(searchInput);
-      console.log("search successful!");
-      console.log(searchedMeals?.meals);
     } else if (navSelection === "nationality") {
       console.log("nationality search");
     } else {
-      console.log("main ingredient search");
       await fetchByMainIngredient(searchInput);
     }
     setSearchInput("");
