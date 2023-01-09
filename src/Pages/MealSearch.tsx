@@ -8,9 +8,13 @@ import IMealByIngredient from "../utils/interfaces/IMealByIngredient";
 
 export default function MealSearch(): JSX.Element {
   const [ingredients, setIngredients] = useState<{ meals: Ingredient[] }>();
-  const [categories, setCategories] = useState<ICategories>();
-  const [nationalies, setNationalities] = useState<{ meals: Nationality[] }>();
+  const [mealsByIngredient, setMealsByIngredient] =
+    useState<{ meals: IMealByIngredient[] | null }>();
+  const [categories, setCategories] = useState<{ categories: ICategory[] }>();
+  const [nationalies, setNationalities] = useState<{ meals: INationality[] }>();
   const [randomMeal, setRandomMeal] = useState<Meal>();
+  const [searchedMeals, setSearchedMeals] =
+    useState<{ meals: Meal[] | null }>();
   const [searchInput, setSearchInput] = useState<string>("");
   const [navSelection, setNavSelection] = useState<
     "meal-search" | "category" | "main-ingredient" | "nationality" | "random"
