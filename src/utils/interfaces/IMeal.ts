@@ -1,6 +1,6 @@
 export default interface Meal {
-  idMeal: string | null;
-  strMeal: string | null;
+  idMeal: string;
+  strMeal: string;
   strDrinkAlternate: string | null;
   strCategory: string | null;
   strArea: string | null;
@@ -52,25 +52,4 @@ export default interface Meal {
   strImageSource: string | null;
   strCreativeCommonsConfirmed: string | null;
   dateModified: string | null;
-}
-
-export interface Ingredient {
-  idIngredient: string;
-  strIngredient: string;
-  strDescription: string | null;
-  strType: string | null;
-}
-
-export default interface ICategory {
-  idCategory: string;
-  strCategory: string | null;
-  strCategoryThumb: string | null;
-  strCategoryDescription: string | null;
-}
-export default interface ICategories {
-  categories: ICategory[];
-}
-
-export interface Nationality {
-  strArea: string;
 }
