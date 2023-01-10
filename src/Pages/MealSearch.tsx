@@ -4,17 +4,18 @@ import ICategory from "../utils/interfaces/ICategory";
 import INationality from "../utils/interfaces/INationality";
 import OneCategory from "../components/oneCategory";
 import Ingredient from "../utils/interfaces/Ingredient";
-import IMealByIngredient from "../utils/interfaces/IMealByIngredient";
+import IMealByIngredientOrNationOrCategory from "../utils/interfaces/IMealByIngredientOrNationOrCat";
+import MealPreview from "../components/MealPreview";
 
 export default function MealSearch(): JSX.Element {
   const [ingredients, setIngredients] = useState<{ meals: Ingredient[] }>();
-  const [mealsByIngredient, setMealsByIngredient] =
-    useState<{ meals: IMealByIngredient[] | null }>();
+  const [mealsByIngredient, setMealsByIngredient] = useState<
+    IMealByIngredientOrNationOrCategory[] | null
+  >(null);
   const [categories, setCategories] = useState<{ categories: ICategory[] }>();
   const [nationalies, setNationalities] = useState<{ meals: INationality[] }>();
   const [randomMeal, setRandomMeal] = useState<Meal>();
-  const [searchedMeals, setSearchedMeals] =
-    useState<{ meals: Meal[] | null }>();
+  const [searchedMeals, setSearchedMeals] = useState<Meal[] | null>();
   const [searchInput, setSearchInput] = useState<string>("");
   const [navSelection, setNavSelection] = useState<
     "meal-search" | "category" | "main-ingredient" | "nationality" | "random"
@@ -62,11 +63,9 @@ export default function MealSearch(): JSX.Element {
   async function fetchSearchedMeals(search: string) {
     const endpoint =
       "https://www.themealdb.com/api/json/v1/1/search.php?s=" + search;
-    console.log(endpoint);
     const response = await fetch(endpoint);
     const mealsOrNull: { meals: Meal[] | null } = await response.json();
-    console.log(mealsOrNull);
-    setSearchedMeals(mealsOrNull);
+    setSearchedMeals(mealsOrNull.meals);
   }
 
   async function fetchByMainIngredient(search: string) {
@@ -75,9 +74,10 @@ export default function MealSearch(): JSX.Element {
     try {
       const response = await fetch(endpoint);
       try {
-        const mealsOrNull: { meals: IMealByIngredient[] | null } =
-          await response.json();
-        setMealsByIngredient(mealsOrNull);
+        const mealsOrNull: {
+          meals: IMealByIngredientOrNationOrCategory[] | null;
+        } = await response.json();
+        setMealsByIngredient(mealsOrNull.meals);
       } catch (error) {
         console.log("ERROR IN SECTION TWO!");
         console.error(error);
@@ -96,6 +96,7 @@ export default function MealSearch(): JSX.Element {
       console.log("nationality search");
     } else {
       await fetchByMainIngredient(searchInput);
+      console.log(mealsByIngredient);
     }
     setSearchInput("");
   };
@@ -142,14 +143,22 @@ export default function MealSearch(): JSX.Element {
         categories?.categories.map((oneCat) => (
           <OneCategory category={oneCat} key={oneCat.idCategory} />
         ))}
-      {navSelection === "main-ingredient" &&
-        (mealsByIngredient ? (
-          <>
-            <h1></h1>
-          </>
-        ) : (
-          <h1>No meals were found containing this ingredient!</h1>
-        ))}
+
+      {mealsByIngredient && (
+        <div className="ctn-meal-preview">
+          {mealsByIngredient.map((oneMeal) => (
+            <MealPreview meal={oneMeal} key={oneMeal.idMeal} />
+          ))}
+        </div>
+      )}
+
+      {/* {navSelection === "main-ingredient" && mealsByIngredient && (
+        <div className="ctn-meal-preview">
+          {mealsByIngredient.map((oneMeal) => {
+            <MealPreview meal={oneMeal} key={oneMeal.idMeal} />;
+          })}
+        </div>
+      )} */}
     </>
   );
 }
