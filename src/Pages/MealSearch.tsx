@@ -144,21 +144,21 @@ export default function MealSearch(): JSX.Element {
           <OneCategory category={oneCat} key={oneCat.idCategory} />
         ))}
 
-      {mealsByIngredient && (
+      {/* {mealsByIngredient && (
+        <div className="ctn-meal-preview">
+          {mealsByIngredient.map((oneMeal) => (
+            <MealPreview meal={oneMeal} key={oneMeal.idMeal} />
+          ))}
+        </div>
+      )} */}
+
+      {navSelection === "main-ingredient" && mealsByIngredient && (
         <div className="ctn-meal-preview">
           {mealsByIngredient.map((oneMeal) => (
             <MealPreview meal={oneMeal} key={oneMeal.idMeal} />
           ))}
         </div>
       )}
-
-      {/* {navSelection === "main-ingredient" && mealsByIngredient && (
-        <div className="ctn-meal-preview">
-          {mealsByIngredient.map((oneMeal) => {
-            <MealPreview meal={oneMeal} key={oneMeal.idMeal} />;
-          })}
-        </div>
-      )} */}
     </>
   );
 }
