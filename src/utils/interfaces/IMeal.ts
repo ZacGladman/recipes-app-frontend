@@ -52,4 +52,5 @@ export default interface Meal {
   strImageSource: string | null;
   strCreativeCommonsConfirmed: string | null;
   dateModified: string | null;
+  [key: string]: string | null;
 }
