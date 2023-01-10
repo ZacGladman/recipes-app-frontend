@@ -142,6 +142,14 @@ export default function MealSearch(): JSX.Element {
         categories?.categories.map((oneCat) => (
           <OneCategory category={oneCat} key={oneCat.idCategory} />
         ))}
+      {navSelection === "main-ingredient" &&
+        (mealsByIngredient ? (
+          <>
+            <h1></h1>
+          </>
+        ) : (
+          <h1>No meals were found containing this ingredient!</h1>
+        ))}
     </>
   );
 }
