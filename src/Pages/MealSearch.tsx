@@ -5,7 +5,7 @@ import INationality from "../utils/interfaces/INationality";
 import OneCategory from "../components/oneCategory";
 import Ingredient from "../utils/interfaces/Ingredient";
 import IMealByIngredientOrNationOrCategory from "../utils/interfaces/IMealByIngredientOrNationOrCat";
-import MealPreview from "../components/MealPreview";
+import MealPreviewA from "../components/MealPreviewA";
 import { Link } from "react-router-dom";
 
 interface MealSearchProps {
@@ -151,7 +151,7 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
       {navSelection === "main-ingredient" && mealsByIngredient && (
         <div className="ctn-meal-preview">
           {mealsByIngredient.map((oneMeal) => (
-            <MealPreview meal={oneMeal} key={oneMeal.idMeal} />
+            <MealPreviewA meal={oneMeal} key={oneMeal.idMeal} />
           ))}
         </div>
       )}
