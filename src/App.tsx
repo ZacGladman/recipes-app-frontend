@@ -8,6 +8,7 @@ import Reviews from "./Pages/Reviews";
 
 function App(): JSX.Element {
   const [signedInUserID, setSignedInUserID] = useState<number | undefined>();
+  const [selectedMeal, setSelectedMeal] = useState<Meal | null>(null);
   return (
     <>
       <h1>chefbook</h1>
