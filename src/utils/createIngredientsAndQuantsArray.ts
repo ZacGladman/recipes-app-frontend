@@ -10,17 +10,15 @@ function filterMeal(meal: Meal, filterTerm: string) {
   return filteredMealNoEmptyStrings;
 }
 
-// export default function createIngredientsAndQuantsArray(
-//   meal: Meal
-// ): { ingredient: string; quantity: string }[] {
-//   const returnArray = [];
-//   const ingredientsArray = filterMeal(meal, "strIngredient");
-//   const quantitiesArray = filterMeal(meal, "strMeasure");
-//   for (let i = 0; i < ingredientsArray.length; i++) {
-//     returnArray.push({
-//       ingredient: ingredientsArray[i],
-//       quantity: quantitiesArray[i],
-//     });
-//   }
-//   return returnArray;
-// }
+export default function createIngredientsAndQuantsArray(meal: Meal) {
+  const returnArray = [];
+  const ingredientsArray = filterMeal(meal, "strIngredient");
+  const quantitiesArray = filterMeal(meal, "strMeasure");
+  for (let i = 0; i < ingredientsArray.length; i++) {
+    returnArray.push({
+      ingredient: ingredientsArray[i],
+      quantity: quantitiesArray[i],
+    });
+  }
+  return returnArray;
+}
