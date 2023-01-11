@@ -8,8 +8,9 @@ interface IMealPreview {
 
 export default function MealPreviewA(props: IMealPreview): JSX.Element {
   const meal = props.meal;
+  const id = meal.idMeal;
   return (
-    <Link to={`meal-search/${meal.strMeal}`}>
+    <Link to={`${id}`}>
       <div>
         <h1>{meal.strMeal}</h1>
         {meal.strMealThumb !== null && <img src={meal.strMealThumb} alt="" />}
