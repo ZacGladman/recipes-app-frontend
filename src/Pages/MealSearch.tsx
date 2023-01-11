@@ -59,7 +59,6 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
     const response = await fetch(
       "https://www.themealdb.com/api/json/v1/1/random.php"
     );
-    console.log("response" + response);
     const jsonBody: { meals: Meal[] } = await response.json();
     props.setSelectedMeal(jsonBody.meals[0]);
   }
@@ -142,19 +141,10 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
           />
         </form>
       )}
-      {navSelection === "random" && randomMeal && <p>{randomMeal.strMeal}</p>}
       {navSelection === "category" &&
         categories?.categories.map((oneCat) => (
           <OneCategory category={oneCat} key={oneCat.idCategory} />
         ))}
-
-      {/* {mealsByIngredient && (
-        <div className="ctn-meal-preview">
-          {mealsByIngredient.map((oneMeal) => (
-            <MealPreview meal={oneMeal} key={oneMeal.idMeal} />
-          ))}
-        </div>
-      )} */}
 
       {navSelection === "main-ingredient" && mealsByIngredient && (
         <div className="ctn-meal-preview">
