@@ -24,7 +24,15 @@ function App(): JSX.Element {
       </nav>
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/meal-search" element={<MealSearch />} />
+        <Route
+          path="/meal-search"
+          element={
+            <MealSearch
+              selectedMeal={selectedMeal}
+              setSelectedMeal={setSelectedMeal}
+            />
+          }
+        />
         <Route path="/reviews" element={<Reviews />} />
         <Route
           path="/meal-search/categories/:category"
