@@ -5,6 +5,10 @@ import { Link } from "react-router-dom";
 import "./App.css";
 import { useState } from "react";
 import Reviews from "./Pages/Reviews";
+import Meal from "./utils/interfaces/IMeal";
+import Recipe from "./components/Recipe";
+import RecipeWithParams from "./components/RecipeWithParams";
+import RecipeRandom from "./components/RecipeRandom";
 
 function App(): JSX.Element {
   const [signedInUserID, setSignedInUserID] = useState<number | undefined>();
