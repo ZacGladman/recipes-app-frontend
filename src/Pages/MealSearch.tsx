@@ -6,15 +6,21 @@ import OneCategory from "../components/oneCategory";
 import Ingredient from "../utils/interfaces/Ingredient";
 import IMealByIngredientOrNationOrCategory from "../utils/interfaces/IMealByIngredientOrNationOrCat";
 import MealPreview from "../components/MealPreview";
+import { Link } from "react-router-dom";
 
-export default function MealSearch(): JSX.Element {
+interface MealSearchProps {
+  selectedMeal: Meal | undefined;
+  setSelectedMeal: React.Dispatch<React.SetStateAction<Meal | undefined>>;
+}
+
+export default function MealSearch(props: MealSearchProps): JSX.Element {
   const [ingredients, setIngredients] = useState<{ meals: Ingredient[] }>();
   const [mealsByIngredient, setMealsByIngredient] = useState<
     IMealByIngredientOrNationOrCategory[] | null
   >(null);
   const [categories, setCategories] = useState<{ categories: ICategory[] }>();
   const [nationalies, setNationalities] = useState<{ meals: INationality[] }>();
-  const [randomMeal, setRandomMeal] = useState<Meal>();
+
   const [searchedMeals, setSearchedMeals] = useState<Meal[] | null>();
   const [searchInput, setSearchInput] = useState<string>("");
   const [navSelection, setNavSelection] = useState<
@@ -55,9 +61,7 @@ export default function MealSearch(): JSX.Element {
     );
     console.log("response" + response);
     const jsonBody: { meals: Meal[] } = await response.json();
-    console.log("jsonBody: " + jsonBody);
-    console.log(jsonBody.meals);
-    setRandomMeal(jsonBody.meals[0]);
+    props.setSelectedMeal(jsonBody.meals[0]);
   }
 
   async function fetchSearchedMeals(search: string) {
