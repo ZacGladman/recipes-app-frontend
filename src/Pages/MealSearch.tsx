@@ -9,8 +9,8 @@ import MealPreview from "../components/MealPreview";
 import { Link } from "react-router-dom";
 
 interface MealSearchProps {
-  selectedMeal: Meal | undefined;
-  setSelectedMeal: React.Dispatch<React.SetStateAction<Meal | undefined>>;
+  selectedMeal: Meal | null;
+  setSelectedMeal: React.Dispatch<React.SetStateAction<Meal | null>>;
 }
 
 export default function MealSearch(props: MealSearchProps): JSX.Element {
