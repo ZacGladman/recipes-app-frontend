@@ -47,6 +47,9 @@ function App(): JSX.Element {
           element={<h1>nationality</h1>}
         />
         <Route
+          path="/meal-search/:id"
+          element={selectedMeal && <RecipeWithParams />}
+        />
         <Route
           path="/meal-search/random"
           element={<RecipeRandom meal={selectedMeal} />}
