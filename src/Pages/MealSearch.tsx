@@ -117,6 +117,7 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
         <button onClick={() => setNavSelection("nationality")}>
           nationality
         </button>
+        <Link to="/meal-search/random">
         <button
           onClick={async () => {
             setNavSelection("random");
@@ -125,6 +126,7 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
         >
           random
         </button>
+        </Link>
       </nav>
       {(navSelection === "meal-search" ||
         navSelection === "main-ingredient" ||
