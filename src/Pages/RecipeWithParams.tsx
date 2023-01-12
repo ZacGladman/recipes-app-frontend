@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Meal from "../utils/interfaces/IMeal";
-import Recipe from "./Recipe";
+import Recipe from "../components/Recipe";
 
 export default function RecipeWithParams(): JSX.Element {
   const [meal, setMeal] = useState<Meal>();
@@ -10,7 +10,6 @@ export default function RecipeWithParams(): JSX.Element {
   const endpoint = "https://themealdb.com/api/json/v1/1/lookup.php?i=" + id;
 
   useEffect(() => {
-    console.log(endpoint);
     const fetchMealByID = async () => {
       const response = await fetch(endpoint);
       const meal: { meals: Meal[] } = await response.json();
