@@ -129,8 +129,7 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
         </Link>
       </nav>
       {(navSelection === "meal-search" ||
-        navSelection === "main-ingredient" ||
-        navSelection === "nationality") && (
+        navSelection === "main-ingredient") && (
         <form
           onSubmit={async (e) => {
             await handleSubmitSearch(e);
