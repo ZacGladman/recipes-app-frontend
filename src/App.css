@@ -7,6 +7,12 @@ Link {
   color: black;
 }
 
+/* ============================================= RECIPE COMPONENT */
 .recipe-image {
   height: 25rem;
+}
+
+.ctn-recipe-instructions {
+  width: 60%;
+  line-height: 1.2rem;
 }
