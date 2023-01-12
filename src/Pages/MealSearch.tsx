@@ -95,8 +95,6 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
     e.preventDefault();
     if (navSelection === "meal-search") {
       await fetchSearchedMeals(searchInput);
-    } else if (navSelection === "nationality") {
-      console.log("nationality search");
     } else {
       await fetchByMainIngredient(searchInput);
       console.log(mealsByIngredient);
@@ -163,6 +161,18 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
         </div>
       )}
 
+      {navSelection === "nationality" && nationalies && (
+        <div className="ctn-nationalities">
+          {nationalies.meals.map((oneNationality) => (
+            <Link
+              to={`../meal-search/nationality/${oneNationality.strArea}`}
+              key={oneNationality.strArea}
+            >
+              <button>{oneNationality.strArea}</button>
+            </Link>
+          ))}
+        </div>
+      )}
     </>
   );
 }
