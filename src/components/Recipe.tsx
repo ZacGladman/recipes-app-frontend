@@ -1,5 +1,6 @@
 import Meal from "../utils/interfaces/IMeal";
 import createIngredientsAndQuantsArray from "../utils/createIngredientsAndQuantsArray";
+import createInstructionsParagraph from "../utils/createInstructionsParagraph";
 
 interface RecipeProps {
   meal: Meal | null;
@@ -26,6 +27,20 @@ export default function Recipe(props: RecipeProps): JSX.Element {
             </p>
           );
         })}
+        <div className="ctn-recipe-instructions">
+          <p>Instructions</p>
+          {meal.strInstructions ? (
+            createInstructionsParagraph(meal.strInstructions).map(
+              (paragraph) => (
+                <p key={paragraph.key} className="instructions-paragraph">
+                  {paragraph.text}
+                </p>
+              )
+            )
+          ) : (
+            <p>no instructions found!</p>
+          )}
+        </div>
       </>
     );
   } else {
