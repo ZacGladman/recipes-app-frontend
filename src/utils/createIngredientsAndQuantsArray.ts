@@ -9,12 +9,17 @@ function filterMeal(meal: Meal, filterTerm: string) {
   return filteredMealNoEmptyStrings;
 }
 
-export default function createIngredientsAndQuantsArray(meal: Meal) {
+export default function createIngredientsAndQuantsArray(meal: Meal): {
+  id: number;
+  ingredient: string | null;
+  quantity: string | null;
+}[] {
   const returnArray = [];
   const ingredientsArray = filterMeal(meal, "strIngredient");
   const quantitiesArray = filterMeal(meal, "strMeasure");
   for (let i = 0; i < ingredientsArray.length; i++) {
     returnArray.push({
+      id: i,
       ingredient: ingredientsArray[i],
       quantity: quantitiesArray[i],
     });
