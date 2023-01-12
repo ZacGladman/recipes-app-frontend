@@ -1,5 +1,6 @@
 import Meal from "../utils/interfaces/IMeal";
 import createIngredientsAndQuantsArray from "../utils/createIngredientsAndQuantsArray";
+import { Link } from "react-router-dom";
 import createInstructionsParagraph from "../utils/createInstructionsParagraph";
 
 interface RecipeProps {
