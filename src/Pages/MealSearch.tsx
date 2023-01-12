@@ -154,6 +154,15 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
           ))}
         </div>
       )}
+
+      {navSelection === "meal-search" && searchedMeals && (
+        <div className="ctn-meal-preview">
+          {searchedMeals.map((oneMeal) => (
+            <MealPreviewA meal={oneMeal} key={oneMeal.idMeal} />
+          ))}
+        </div>
+      )}
+
     </>
   );
 }
