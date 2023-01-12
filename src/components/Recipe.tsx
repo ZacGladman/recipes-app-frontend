@@ -19,9 +19,10 @@ export default function Recipe(props: RecipeProps): JSX.Element {
         {meal.strMealThumb && (
           <img src={meal.strMealThumb} alt="" className="recipe-image" />
         )}
+        <p>Ingredients</p>
         {ingredientsAndQuantsArray.map((element) => {
           return (
-            <p key={element.ingredient}>
+            <p key={element.id}>
               {element.ingredient?.toLowerCase()}:{" "}
               {element.quantity?.toLowerCase()}
             </p>
