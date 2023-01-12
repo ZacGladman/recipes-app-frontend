@@ -12,6 +12,9 @@ export default function Recipe(props: RecipeProps): JSX.Element {
     return (
       <>
         <h1>{meal.strMeal}</h1>
+        <Link to={`../meal-search/categories/${meal.strCategory}`}>
+          <p>{meal.strCategory}</p>
+        </Link>
         {meal.strMealThumb && (
           <img src={meal.strMealThumb} alt="" className="recipe-image" />
         )}
