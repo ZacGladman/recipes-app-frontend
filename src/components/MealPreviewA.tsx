@@ -10,7 +10,7 @@ export default function MealPreviewA(props: IMealPreview): JSX.Element {
   const meal = props.meal;
   const id = meal.idMeal;
   return (
-    <Link to={`${id}`}>
+    <Link to={`../meal-search/${id}`}>
       <div>
         <h1>{meal.strMeal}</h1>
         {meal.strMealThumb !== null && <img src={meal.strMealThumb} alt="" />}
