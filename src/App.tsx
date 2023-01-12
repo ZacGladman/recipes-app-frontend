@@ -36,21 +36,21 @@ function App(): JSX.Element {
         />
         <Route path="/reviews" element={<Reviews />} />
         <Route
-          path="/meal-search/categories/:category"
-          element={<h1>category</h1>}
-        />
-        <Route
           path="/meal-search/main-ingredient/:ingredient"
           element={<h1>ingredient</h1>}
-        />
-        <Route
-          path="/meal-search/nationality/:country"
-          element={<h1>nationality</h1>}
         />
         <Route path="/meal-search/:id" element={<RecipeWithParams />} />
         <Route
           path="/meal-search/random"
           element={<RecipeRandom meal={selectedMeal} />}
+        />
+        <Route
+          path="/meal-search/categories/:cat"
+          element={<MealsByCategory />}
+        />
+        <Route
+          path="/meal-search/nationality/:nation"
+          element={<MealsByNation />}
         />
       </Routes>
     </>
