@@ -6,9 +6,10 @@ import "./App.css";
 import { useState } from "react";
 import Reviews from "./Pages/Reviews";
 import Meal from "./utils/interfaces/IMeal";
-import Recipe from "./components/Recipe";
-import RecipeWithParams from "./components/RecipeWithParams";
-import RecipeRandom from "./components/RecipeRandom";
+import RecipeWithParams from "./Pages/RecipeWithParams";
+import RecipeRandom from "./Pages/RecipeRandom";
+import MealsByCategory from "./Pages/MealsByCategory";
+import MealsByNation from "./Pages/MealsByNation";
 
 function App(): JSX.Element {
   const [signedInUserID, setSignedInUserID] = useState<number | undefined>();
