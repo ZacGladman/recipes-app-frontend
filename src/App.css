@@ -71,6 +71,18 @@ button {
   padding: 0.2rem;
 }
 
+.meal-search-form-search-bar {
+  height: 2rem;
+  font-size: 1.1rem;
+  padding-left: 1.4rem;
+  width: 5rem;
+  transition: width 0.4s ease-in-out;
+}
+
+.meal-search-form-search-bar:focus {
+  width: 15rem;
+}
+
 /* ============================================= RECIPE COMPONENT */
 .recipe-image {
   height: 25rem;
