@@ -8,11 +8,20 @@ interface IOneCategory {
 export default function OneCategory(props: IOneCategory): JSX.Element {
   const category = props.category;
   return (
-    <Link to={`/meal-search/categories/${category.strCategory}`}>
-      <h1>{category.strCategory}</h1>
-      {category.strCategoryThumb && (
-        <img src={category.strCategoryThumb} alt="category pic" />
-      )}
+    <Link
+      to={`/meal-search/categories/${category.strCategory}`}
+      style={{ textDecoration: "none" }}
+    >
+      <div className="ctn-single-category">
+        {category.strCategoryThumb && (
+          <img
+            src={category.strCategoryThumb}
+            alt="category pic"
+            className="single-category-image"
+          />
+        )}
+        <p className="single-category-title">{category.strCategory}</p>
+      </div>
     </Link>
   );
 }
