@@ -185,16 +185,19 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
       )}
 
       {navSelection === "nationality" && nationalies && (
-        <div className="ctn-nationalities">
-          {nationalies.meals.map((oneNationality) => (
-            <Link
-              to={`../meal-search/nationality/${oneNationality.strArea}`}
-              key={oneNationality.strArea}
-            >
-              <button>{oneNationality.strArea}</button>
-            </Link>
-          ))}
-        </div>
+        <>
+          <button onClick={() => setNavSelection("dish-name")}>home</button>
+          <div className="ctn-nationalities">
+            {nationalies.meals.map((oneNationality) => (
+              <Link
+                to={`../meal-search/nationality/${oneNationality.strArea}`}
+                key={oneNationality.strArea}
+              >
+                <button>{oneNationality.strArea}</button>
+              </Link>
+            ))}
+          </div>
+        </>
       )}
     </>
   );
