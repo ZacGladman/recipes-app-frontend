@@ -63,6 +63,14 @@ button {
   margin-top: 2rem;
   text-align: center;
 }
+
+.ctn-meal-search-dropdown {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.185rem;
+  width: fit-content;
+  padding: 0.2rem;
+}
+
 /* ============================================= RECIPE COMPONENT */
 .recipe-image {
   height: 25rem;
