@@ -125,8 +125,10 @@ button {
   margin-top: 5rem;
 }
 
-.ctn-single-meal-preview {
-  padding-right: 1.5rem;
+.ctn-single-meal-preview,
+.ctn-single-category {
+  padding-right: 2rem;
+  padding-bottom: 1rem;
 }
 
 .single-meal-preview-title {
