@@ -91,7 +91,7 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
 
   const handleSubmitSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (navSelection === "meal-search") {
+    if (navSelection === "dish-name") {
       await fetchSearchedMeals(searchInput);
     } else {
       await fetchByMainIngredient(searchInput);
@@ -124,12 +124,31 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
             place of origin
           </option>
         </select>
+        {(navSelection === "dish-name" ||
+          navSelection === "main-ingredient") && (
+          <form
+            onSubmit={async (e) => {
+              await handleSubmitSearch(e);
+            }}
+            className="meal-search-form"
+          >
+            <input
+              className="meal-search-form-search-bar"
+              type="text"
+              placeholder="search"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+            />
+          </form>
       {navSelection === "category" && (
-        <div className="ctn-categories-list">
-          {categories?.categories.map((oneCat) => (
-            <OneCategory category={oneCat} key={oneCat.idCategory} />
-          ))}
-        </div>
+        <>
+          <button onClick={() => setNavSelection("dish-name")}>home</button>
+          <div className="ctn-categories-list">
+            {categories?.categories.map((oneCat) => (
+              <OneCategory category={oneCat} key={oneCat.idCategory} />
+            ))}
+          </div>
+        </>
       )}
 
       {navSelection === "main-ingredient" && mealsByIngredient && (
@@ -143,7 +162,7 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
         </>
       )}
 
-      {navSelection === "meal-search" && searchedMeals && (
+      {navSelection === "dish-name" && searchedMeals && (
         <div className="ctn-meal-previews">
           {searchedMeals.map((oneMeal) => (
             <MealPreviewA meal={oneMeal} key={oneMeal.idMeal} />
