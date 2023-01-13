@@ -102,59 +102,28 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
 
   return (
     <>
-      <nav className="meal-search-nav">
-        <button
-          onClick={() => setNavSelection("meal-search")}
-          className="btn-meal-search"
+      <div className="ctn-meal-search-options">
+        <select
+          className="ctn-meal-search-dropdown"
+          value={navSelection}
+          onChange={(event) => setNavSelection(event.target.value)}
         >
-          meal
-        </button>
-        <button
-          onClick={() => setNavSelection("category")}
-          className="btn-category-search"
-        >
-          category
-        </button>
-        <button
-          onClick={() => setNavSelection("main-ingredient")}
-          className="btn-ingredient-search"
-        >
-          ingredient
-        </button>
-        <button
-          onClick={() => setNavSelection("nationality")}
-          className="btn-nationality-search"
-        >
-          nationality
-        </button>
-        <Link to="/meal-search/random">
-          <button
-            onClick={async () => {
-              setNavSelection("random");
-              await fetchRandomMeal();
-            }}
-            className="btn-random"
-          >
-            random
-          </button>
-        </Link>
-      </nav>
-      {(navSelection === "meal-search" ||
-        navSelection === "main-ingredient") && (
-        <form
-          onSubmit={async (e) => {
-            await handleSubmitSearch(e);
-          }}
-          className="meal-search-form"
-        >
-          <input
-            className="meal-search-form-search-bar"
-            type="text"
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-          />
-        </form>
-      )}
+          <option value="" disabled selected>
+            search option
+          </option>
+          <option className="dropdown-option" value="dish-name">
+            dish name
+          </option>
+          <option className="dropdown-option" value="main-ingredient">
+            contains ingredient
+          </option>
+          <option className="dropdown-option" value="category">
+            category
+          </option>
+          <option className="dropdown-option" value="nationality">
+            place of origin
+          </option>
+        </select>
       {navSelection === "category" && (
         <div className="ctn-categories-list">
           {categories?.categories.map((oneCat) => (
