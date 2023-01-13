@@ -57,6 +57,12 @@ button {
   border: none;
 }
 
+.ctn-meal-search-options {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  text-align: center;
+}
 /* ============================================= RECIPE COMPONENT */
 .recipe-image {
   height: 25rem;
