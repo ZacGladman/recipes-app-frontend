@@ -57,6 +57,7 @@ button {
   border: none;
 }
 
+/* ============================================= MEAL-SEARCH NAVBAR */
 .ctn-meal-search-options {
   display: flex;
   justify-content: center;
@@ -81,6 +82,20 @@ button {
 
 .meal-search-form-search-bar:focus {
   width: 15rem;
+}
+
+.btn-random {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.35rem;
+  color: white;
+  background-color: rgb(149, 69, 193);
+  border: none;
+  border-radius: 2%;
+  padding-top: 0.5rem;
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+  padding-bottom: 0.4rem;
+  margin-left: 0.25rem;
 }
 
 /* ============================================= RECIPE COMPONENT */
