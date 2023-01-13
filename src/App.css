@@ -131,8 +131,9 @@ button {
   padding-bottom: 1rem;
 }
 
-.single-meal-preview-title {
-  width: 13rem;
+.single-meal-preview-title,
+.single-category-title {
+  width: 15rem;
   padding-left: 1rem;
   padding-right: 1rem;
   color: white;
@@ -144,6 +145,16 @@ button {
   margin-top: 0px;
 }
 
-.single-meal-preview-image {
-  width: 15rem;
+.single-meal-preview-image,
+.single-category-image {
+  width: 17rem;
+}
+
+.ctn-single-category {
+  padding-bottom: 3rem;
+}
+
+/*============================================== MEAL PREVIEWS  */
+.categories-view {
+  margin-top: 5rem;
 }
