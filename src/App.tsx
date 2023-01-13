@@ -1,7 +1,6 @@
 import { NavLink, Route, Routes } from "react-router-dom";
 import Homepage from "./Pages/Homepage";
 import MealSearch from "./Pages/MealSearch";
-import { Link } from "react-router-dom";
 import "./App.css";
 import { useState } from "react";
 import Reviews from "./Pages/Reviews";
