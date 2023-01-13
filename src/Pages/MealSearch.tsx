@@ -23,9 +23,7 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
 
   const [searchedMeals, setSearchedMeals] = useState<Meal[] | null>();
   const [searchInput, setSearchInput] = useState<string>("");
-  const [navSelection, setNavSelection] = useState<
-    "meal-search" | "category" | "main-ingredient" | "nationality" | "random"
-  >("meal-search");
+  const [navSelection, setNavSelection] = useState("dish-name");
 
   useEffect(() => {
     async function fetchIngredients() {
