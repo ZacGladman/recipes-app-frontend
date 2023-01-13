@@ -19,7 +19,14 @@ function App(): JSX.Element {
       <nav className="navbar-upper">
         <p className="page-title">chefbook</p>
         <div className="nav-bar-subtitles">
-          {!signedInUserID && <button className="btn-sign-in">sign in</button>}
+          {!signedInUserID && (
+            <button
+              className="btn-sign-in"
+              onClick={() => window.alert("not yet implemented")}
+            >
+              sign in
+            </button>
+          )}
           <NavLink
             to="/reviews"
             className={({ isActive }) =>
