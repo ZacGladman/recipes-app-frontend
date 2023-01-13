@@ -2,11 +2,9 @@ body {
   font-family: "Josefin Sans", sans-serif;
 }
 
-Link {
-  text-decoration: none;
-  color: black;
+button {
+  font-family: "Josefin Sans", sans-serif;
 }
-
 /* ============================================= NAVBAR */
 .navbar-upper {
   display: flex;
