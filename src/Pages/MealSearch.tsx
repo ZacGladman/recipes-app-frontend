@@ -133,11 +133,14 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
       )}
 
       {navSelection === "main-ingredient" && mealsByIngredient && (
-        <div className="ctn-meal-previews">
-          {mealsByIngredient.map((oneMeal) => (
-            <MealPreviewA meal={oneMeal} key={oneMeal.idMeal} />
-          ))}
-        </div>
+        <>
+          <button onClick={() => setNavSelection("dish-name")}>home</button>
+          <div className="ctn-meal-previews">
+            {mealsByIngredient.map((oneMeal) => (
+              <MealPreviewA meal={oneMeal} key={oneMeal.idMeal} />
+            ))}
+          </div>
+        </>
       )}
 
       {navSelection === "meal-search" && searchedMeals && (
