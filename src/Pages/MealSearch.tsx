@@ -104,15 +104,29 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
 
   return (
     <>
-      <nav>
-        <button onClick={() => setNavSelection("meal-search")}>
-          meal search
+      <nav className="meal-search-nav">
+        <button
+          onClick={() => setNavSelection("meal-search")}
+          className="btn-meal-search"
+        >
+          meal
         </button>
-        <button onClick={() => setNavSelection("category")}>category</button>
-        <button onClick={() => setNavSelection("main-ingredient")}>
-          main ingredient
+        <button
+          onClick={() => setNavSelection("category")}
+          className="btn-category-search"
+        >
+          category
         </button>
-        <button onClick={() => setNavSelection("nationality")}>
+        <button
+          onClick={() => setNavSelection("main-ingredient")}
+          className="btn-ingredient-search"
+        >
+          ingredient
+        </button>
+        <button
+          onClick={() => setNavSelection("nationality")}
+          className="btn-nationality-search"
+        >
           nationality
         </button>
         <Link to="/meal-search/random">
@@ -121,6 +135,7 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
               setNavSelection("random");
               await fetchRandomMeal();
             }}
+            className="btn-random"
           >
             random
           </button>
@@ -132,21 +147,26 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
           onSubmit={async (e) => {
             await handleSubmitSearch(e);
           }}
+          className="meal-search-form"
         >
           <input
+            className="meal-search-form-search-bar"
             type="text"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
           />
         </form>
       )}
-      {navSelection === "category" &&
-        categories?.categories.map((oneCat) => (
-          <OneCategory category={oneCat} key={oneCat.idCategory} />
-        ))}
+      {navSelection === "category" && (
+        <div className="ctn-categories-list">
+          {categories?.categories.map((oneCat) => (
+            <OneCategory category={oneCat} key={oneCat.idCategory} />
+          ))}
+        </div>
+      )}
 
       {navSelection === "main-ingredient" && mealsByIngredient && (
-        <div className="ctn-meal-preview">
+        <div className="ctn-meal-previews">
           {mealsByIngredient.map((oneMeal) => (
             <MealPreviewA meal={oneMeal} key={oneMeal.idMeal} />
           ))}
@@ -154,7 +174,7 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
       )}
 
       {navSelection === "meal-search" && searchedMeals && (
-        <div className="ctn-meal-preview">
+        <div className="ctn-meal-previews">
           {searchedMeals.map((oneMeal) => (
             <MealPreviewA meal={oneMeal} key={oneMeal.idMeal} />
           ))}

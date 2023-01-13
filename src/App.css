@@ -7,6 +7,58 @@ Link {
   color: black;
 }
 
+/* ============================================= NAVBAR */
+.navbar-upper {
+  display: flex;
+  background-color: rgb(149, 69, 193);
+  color: white;
+  align-items: baseline;
+}
+
+.page-title {
+  font-size: 4rem;
+  padding-top: 1.25rem;
+  padding-bottom: 0.45rem;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-left: 3.5rem;
+}
+
+.active-navbar-link,
+.navbar-link {
+  text-decoration: none;
+  color: white;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.active-navbar-link {
+  font-weight: bolder;
+  font-size: 2.5rem;
+}
+
+.navbar-link {
+  font-size: 2rem;
+}
+
+.navbar-link:hover,
+.btn-sign-in:hover,
+.btn-sign-out:hover {
+  color: rgba(210, 210, 210, 0.983);
+  font-size: 2.2rem;
+}
+
+.btn-sign-in,
+.btn-sign-out {
+  background-color: inherit;
+  font-size: 2rem;
+  color: white;
+  padding-left: 3rem;
+  padding-right: 0.75rem;
+  font-family: "Josefin Sans", sans-serif;
+  border: none;
+}
+
 /* ============================================= RECIPE COMPONENT */
 .recipe-image {
   height: 25rem;
@@ -15,4 +67,32 @@ Link {
 .ctn-recipe-instructions {
   width: 60%;
   line-height: 1.2rem;
+}
+
+/*============================================== MEAL PREVIEWS  */
+.ctn-meal-previews {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.ctn-single-meal-preview {
+  padding-right: 1.5rem;
+}
+
+.single-meal-preview-title {
+  width: 13rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: white;
+  text-align: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 1.4rem;
+  background-color: rgb(149, 69, 193);
+  margin-top: 0px;
+}
+
+.single-meal-preview-image {
+  width: 15rem;
 }

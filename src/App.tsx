@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { NavLink, Route, Routes } from "react-router-dom";
 import Homepage from "./Pages/Homepage";
 import MealSearch from "./Pages/MealSearch";
 import { Link } from "react-router-dom";
@@ -16,12 +16,28 @@ function App(): JSX.Element {
   const [selectedMeal, setSelectedMeal] = useState<Meal | null>(null);
   return (
     <>
-      <h1>chefbook</h1>
-      <nav>
-        {!signedInUserID && <button>sign in</button>}
-        <Link to="/reviews">| reviews</Link>
-        <Link to="/meal-search"> | meal search</Link>
-        {signedInUserID && <button>sign out</button>}
+      <nav className="navbar-upper">
+        <p className="page-title">chefbook</p>
+        <div className="nav-bar-subtitles">
+          {!signedInUserID && <button className="btn-sign-in">sign in</button>}
+          <NavLink
+            to="/reviews"
+            className={({ isActive }) =>
+              isActive ? "active-navbar-link" : "navbar-link"
+            }
+          >
+            reviews
+          </NavLink>
+          <NavLink
+            to="/meal-search"
+            className={({ isActive }) =>
+              isActive ? "active-navbar-link" : "navbar-link"
+            }
+          >
+            meal search
+          </NavLink>
+          {signedInUserID && <button className="btn-sign-out">sign out</button>}
+        </div>
       </nav>
       <Routes>
         <Route path="/" element={<Homepage />} />
