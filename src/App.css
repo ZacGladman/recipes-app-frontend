@@ -115,11 +115,14 @@ button {
   line-height: 1.2rem;
 }
 
-/*============================================== MEAL PREVIEWS  */
-.ctn-meal-previews {
+/*============================================== MEAL PREVIEWS + CATEGORIES  */
+.ctn-meal-previews,
+.ctn-categories-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  margin-left: 5rem;
+  margin-top: 5rem;
 }
 
 .ctn-single-meal-preview {
