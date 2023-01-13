@@ -155,14 +155,14 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
       </div>
 
       {navSelection === "category" && (
-        <>
+        <div className="categories-view">
           <button onClick={() => setNavSelection("dish-name")}>home</button>
           <div className="ctn-categories-list">
             {categories?.categories.map((oneCat) => (
               <OneCategory category={oneCat} key={oneCat.idCategory} />
             ))}
           </div>
-        </>
+        </div>
       )}
 
       {navSelection === "main-ingredient" && mealsByIngredient && (
