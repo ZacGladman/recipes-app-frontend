@@ -96,6 +96,13 @@ button {
   padding-right: 0.4rem;
   padding-bottom: 0.4rem;
   margin-left: 0.25rem;
+  transition-duration: 0.2ms;
+}
+
+.btn-random:hover {
+  border: 0.1rem rgb(149, 69, 193) solid;
+  background-color: white;
+  color: rgb(149, 69, 193);
 }
 
 /* ============================================= RECIPE COMPONENT */
