@@ -176,6 +176,12 @@ button {
   margin-block-start: 0;
 }
 
+.recipe-ingredients-title {
+  font-size: 1.35rem;
+  font-weight: bolder;
+  margin-block-start: 0;
+}
+
 }
 
 /* ============================================= RANDOM RECIPE COMPONENT */
