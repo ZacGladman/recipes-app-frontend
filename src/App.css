@@ -109,6 +109,16 @@ button {
 }
 
 /* ============================================= RECIPE COMPONENT */
+.ctn-recipe {
+  display: grid;
+  grid:
+    "title title title"
+    " AvRtn AvRtn AvRtn"
+    "img ingredients sidebar"
+    "img ingredients empty"
+    "txt txt txt";
+  align-items: center;
+}
 .recipe-image {
   height: 25rem;
 }
