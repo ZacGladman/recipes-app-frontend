@@ -11,6 +11,8 @@ import { Link } from "react-router-dom";
 interface MealSearchProps {
   selectedMeal: Meal | null;
   setSelectedMeal: React.Dispatch<React.SetStateAction<Meal | null>>;
+  navSelection: string;
+  setNavSelection: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function MealSearch(props: MealSearchProps): JSX.Element {
@@ -23,7 +25,9 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
 
   const [searchedMeals, setSearchedMeals] = useState<Meal[] | null>();
   const [searchInput, setSearchInput] = useState<string>("");
-  const [navSelection, setNavSelection] = useState("dish-name");
+
+  const navSelection = props.navSelection;
+  const setNavSelection = props.setNavSelection;
 
   useEffect(() => {
     async function fetchIngredients() {
