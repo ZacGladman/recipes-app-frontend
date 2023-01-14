@@ -31,6 +31,14 @@ export default function MealsByCategory(): JSX.Element {
     return (
       <div className="ctn-meals-by-category-or-nation">
         <div className="ctn-meals-by-category-or-nation-banner">
+          <Link to="/meal-search" style={{ textDecoration: "none" }}>
+            <p
+              className="btn-back-to-meal-previews"
+              onClick={() => setNavSelection("category")}
+            >
+              ↩
+            </p>
+          </Link>
           <p className="title-meals-by-category-or-nation">{cat}</p>
         <div className="ctn-meal-previews">
     );
