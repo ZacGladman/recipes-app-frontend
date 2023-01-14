@@ -169,6 +169,13 @@ button {
   text-align: center;
 }
 
+.ctn-recipe-ingredients {
+  grid-area: ingredients;
+  align-self: start;
+  justify-self: start;
+  margin-block-start: 0;
+}
+
 }
 
 /* ============================================= RANDOM RECIPE COMPONENT */
