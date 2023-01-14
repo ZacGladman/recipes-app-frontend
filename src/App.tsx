@@ -13,6 +13,7 @@ import MealsByNation from "./Pages/MealsByNation";
 function App(): JSX.Element {
   const [signedInUserID, setSignedInUserID] = useState<number | undefined>();
   const [selectedMeal, setSelectedMeal] = useState<Meal | null>(null);
+  const [navSelection, setNavSelection] = useState<string>("dish-name");
   return (
     <>
       <nav className="navbar-upper">
@@ -53,6 +54,8 @@ function App(): JSX.Element {
             <MealSearch
               selectedMeal={selectedMeal}
               setSelectedMeal={setSelectedMeal}
+              navSelection={navSelection}
+              setNavSelection={setNavSelection}
             />
           }
         />
@@ -68,11 +71,11 @@ function App(): JSX.Element {
         />
         <Route
           path="/meal-search/categories/:cat"
-          element={<MealsByCategory />}
+          element={<MealsByCategory setNavSelection={setNavSelection} />}
         />
         <Route
           path="/meal-search/nationality/:nation"
-          element={<MealsByNation />}
+          element={<MealsByNation setNavSelection={setNavSelection} />}
         />
       </Routes>
     </>
