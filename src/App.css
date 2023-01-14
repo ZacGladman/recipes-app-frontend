@@ -295,7 +295,7 @@ button {
   margin-top: 6rem;
   margin-bottom: none;
   background-color: white;
-  color: rgb(149, 69, 193);
+  color: #9545c1;
   padding-left: 1rem;
 }
 
@@ -369,7 +369,7 @@ button {
   }
 }
 
-/* ======================================================================Nationalities */
+/* ======================================================================NATIONALITIES */
 
 .ctn-nationalities {
   display: flex;
