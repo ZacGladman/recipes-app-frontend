@@ -251,4 +251,14 @@ button {
   }
 }
 
+/* ======================================================================Nationalities */
+
+.ctn-nationalities {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-left: 15rem;
+  margin-right: 15rem;
+}
+
   transition-duration: 0.4s;
