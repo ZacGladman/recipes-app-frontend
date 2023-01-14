@@ -131,10 +131,9 @@ button {
   margin-top: 1rem;
 }
 
-.ctn-single-meal-preview,
-.ctn-single-category {
-  padding-right: 2rem;
-  padding-bottom: 1rem;
+.ctn-single-meal-preview {
+  margin-right: 2rem;
+  margin-bottom: 1rem;
 }
 
 .single-meal-preview-title,
