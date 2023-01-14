@@ -151,8 +151,12 @@ button {
   transition-duration: 0.2s;
 }
 
-.single-meal-preview-image,
-.single-category-image {
+.single-meal-preview-title:hover {
+  background-color: white;
+  color: rgb(149, 69, 193);
+  border: rgb(149, 69, 193) solid 0.15rem;
+}
+
   width: 17rem;
   transition-duration: 0.2s;
 }
