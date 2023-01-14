@@ -195,7 +195,11 @@ button {
   color: black;
 }
 
+/* ======================================================================CATEGORIES */
 .categories-view {
+  margin-top: none;
+}
+
 .ctn-categories-list {
   display: flex;
   flex-wrap: wrap;
