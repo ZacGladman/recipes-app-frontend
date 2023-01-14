@@ -186,6 +186,17 @@ button {
   font-size: 1.15rem;
 }
 
+.ctn-recipe-avg-rating {
+  grid-area: AvRtn;
+  text-align: center;
+  margin-block-end: 4rem;
+}
+
+.recipe-avg-rating-text {
+  font-size: 1.2rem;
+  margin-block-end: 0.3rem;
+}
+
 }
 
 /* ============================================= RANDOM RECIPE COMPONENT */
