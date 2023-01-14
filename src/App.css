@@ -162,6 +162,13 @@ button {
   margin-right: 7.5rem;
   margin-top: 3rem;
 }
+.recipe-instructions-title {
+  font-size: 1.5rem;
+  font-weight: bolder;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
 }
 
 /* ============================================= RANDOM RECIPE COMPONENT */
