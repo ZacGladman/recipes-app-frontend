@@ -157,12 +157,14 @@ button {
   border: rgb(149, 69, 193) solid 0.15rem;
 }
 
+.single-meal-preview-image {
   width: 17rem;
   transition-duration: 0.2s;
 }
 
-.ctn-single-category {
-  padding-bottom: 3rem;
+.single-meal-preview-image:hover {
+  border: rgb(149, 69, 193) solid 0.25rem;
+  width: 16.7rem;
 }
 
   transition-duration: 0.2s;
