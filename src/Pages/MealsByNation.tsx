@@ -4,13 +4,13 @@ import IMealByIngredientOrNationOrCategory from "../utils/interfaces/IMealByIngr
 import LoadingSpin from "react-loading-spin";
 import MealPreviewA from "../components/MealPreviewA";
 
-interface MealsByNation {
+interface MealsByNationProps {
   setNavSelection: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function MealsByNation({
   setNavSelection,
-}: MealsByNation): JSX.Element {
+}: MealsByNationProps): JSX.Element {
   const [meals, setMeals] = useState<
     IMealByIngredientOrNationOrCategory[] | null
   >(null);
