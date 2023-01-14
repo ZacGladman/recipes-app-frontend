@@ -14,6 +14,7 @@ interface RecipeProps {
 export default function Recipe(props: RecipeProps): JSX.Element {
   const meal = props.meal;
   const [rating, setRating] = useState(0);
+  console.log(rating);
   const handleRating = (rate: number) => {
     setRating(rate);
   };
