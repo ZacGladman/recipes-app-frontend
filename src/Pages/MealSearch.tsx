@@ -158,20 +158,8 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
         </Link>
       </div>
 
-      {navSelection === "category" && (
-        <div className="categories-view">
-          <button onClick={() => setNavSelection("dish-name")}>home</button>
-          <div className="ctn-categories-list">
-            {categories?.categories.map((oneCat) => (
-              <OneCategory category={oneCat} key={oneCat.idCategory} />
-            ))}
-          </div>
-        </div>
-      )}
-
       {navSelection === "main-ingredient" && mealsByIngredient && (
         <>
-          <button onClick={() => setNavSelection("dish-name")}>home</button>
           <div className="ctn-meal-previews">
             {mealsByIngredient.map((oneMeal) => (
               <MealPreviewA meal={oneMeal} key={oneMeal.idMeal} />
@@ -199,19 +187,18 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
       )}
 
       {navSelection === "nationality" && nationalies && (
-        <>
-          <button onClick={() => setNavSelection("dish-name")}>home</button>
-          <div className="ctn-nationalities">
-            {nationalies.meals.map((oneNationality) => (
-              <Link
-                to={`../meal-search/nationality/${oneNationality.strArea}`}
-                key={oneNationality.strArea}
-              >
-                <button>{oneNationality.strArea}</button>
-              </Link>
-            ))}
-          </div>
-        </>
+        <div className="ctn-nationalities">
+          {nationalies.meals.map((oneNationality) => (
+            <Link
+              to={`../meal-search/nationality/${oneNationality.strArea}`}
+              key={oneNationality.strArea}
+            >
+              <button className="color-change-4x">
+                {oneNationality.strArea}
+              </button>
+            </Link>
+          ))}
+        </div>
       )}
     </>
   );
