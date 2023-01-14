@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import Meal from "../utils/interfaces/IMeal";
 import Recipe from "../components/Recipe";
-import { MdAutorenew } from "react-icons/md";
 
 interface RandomRecipeProps {
   meal: Meal | null;
