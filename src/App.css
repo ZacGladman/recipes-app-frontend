@@ -197,6 +197,42 @@ button {
   margin-block-end: 0.3rem;
 }
 
+/* ======================================RECIPE SIDEBOX */
+.recipe-actions-sidebox {
+  display: flex;
+  flex-direction: column;
+  border: 0.15rem lightgray solid;
+  width: 14rem;
+  align-items: center;
+  align-self: start;
+  grid-area: sidebar;
+  height: 15rem;
+  margin-left: 2rem;
+}
+
+.recipe-rating-input {
+  margin-top: 0.75rem;
+}
+.recipe-rate {
+  font-size: 1rem;
+  margin-top: 0.2rem;
+  margin-bottom: 2.75rem;
+}
+.recipe-review-btn,
+.recipe-add-to-cooklist-btn {
+  margin-bottom: 1rem;
+  color: white;
+  background-color: rgb(149, 69, 193);
+  border: none;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
+.add-to-cooklist-icon {
+  font-size: 1.5rem;
+}
+.recipe-review-btn-icon {
+  font-size: 1.15rem;
+  margin-right: 0.1rem;
 }
 
 /* ============================================= RANDOM RECIPE COMPONENT */
