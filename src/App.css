@@ -196,6 +196,17 @@ button {
 }
 
 .categories-view {
+.ctn-categories-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-left: 15rem;
+  margin-right: 15rem;
+  margin-top: none;
+  margin-bottom: 5rem;
+  padding-top: none;
+}
+
   transition-duration: 0.3s;
 }
 
