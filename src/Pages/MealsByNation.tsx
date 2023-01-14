@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import IMealByIngredientOrNationOrCategory from "../utils/interfaces/IMealByIngredientOrNationOrCat";
 import LoadingSpin from "react-loading-spin";
 import MealPreviewA from "../components/MealPreviewA";
 
-export default function MealsByNation(): JSX.Element {
+interface MealsByNation {
+  setNavSelection: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default function MealsByNation({
+  setNavSelection,
+}: MealsByNation): JSX.Element {
   const [meals, setMeals] = useState<
     IMealByIngredientOrNationOrCategory[] | null
   >(null);
