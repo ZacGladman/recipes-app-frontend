@@ -136,8 +136,18 @@ button {
   margin-bottom: 0.2rem;
   align-self: center;
 }
+.recipe-back-btn {
+  margin-right: 1rem;
+  margin-bottom: 0;
+  font-size: 1.5rem;
+  justify-self: top;
+}
+
 .recipe-image {
-  height: 25rem;
+  height: 30rem;
+  grid-area: img;
+  align-self: start;
+  justify-self: center;
 }
 
 .ctn-recipe-instructions {
