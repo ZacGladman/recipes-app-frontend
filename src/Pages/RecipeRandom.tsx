@@ -26,7 +26,10 @@ export default function RecipeRandom(props: RandomRecipeProps): JSX.Element {
 
   return (
     <>
-      <MdAutorenew onClick={() => fetchRandomMeal()} />
+      <button className="btn-new-random-meal" onClick={() => fetchRandomMeal()}>
+        new
+      </button>
+
       <Recipe meal={meal} />
     </>
   );
