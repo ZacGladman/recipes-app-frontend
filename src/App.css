@@ -121,11 +121,14 @@ button {
 .btn-new-random-meal {
   font-size: 1rem;
 }
+
+/*============================================== MEAL PREVIEWS */
+.ctn-meal-previews {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   margin-left: 5rem;
-  margin-top: 5rem;
+  margin-top: 1rem;
 }
 
 .ctn-single-meal-preview,
