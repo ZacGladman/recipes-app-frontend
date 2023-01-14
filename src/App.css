@@ -119,6 +119,18 @@ button {
     "txt txt txt";
   align-items: center;
 }
+.ctn-recipe-title {
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  align-items: center;
+  justify-items: center;
+  grid-area: title;
+  text-align: center;
+  height: 5rem;
+  margin-block-end: 0rem;
+  margin-top: 1rem;
+}
 .recipe-image {
   height: 25rem;
 }
