@@ -167,7 +167,34 @@ button {
   width: 16.7rem;
 }
 
+.ctn-meals-by-category-or-nation-banner {
+  display: flex;
+  justify-content: center;
+}
+
+.title-meals-by-category-or-nation {
+  font-size: 3rem;
+  margin-top: 6rem;
+  margin-bottom: none;
+  background-color: white;
+  color: rgb(149, 69, 193);
+  padding-left: 1rem;
+}
+
+.btn-back-to-meal-previews {
+  font-size: 1.5rem;
+  margin-top: 6rem;
+  margin-bottom: none;
+  background-color: white;
+  color: rgb(149, 69, 193);
+  padding-top: 0.5rem;
   transition-duration: 0.2s;
+}
+
+.btn-back-to-meal-previews:hover {
+  color: black;
+}
+
 .categories-view {
   transition-duration: 0.3s;
 }
