@@ -136,8 +136,7 @@ button {
   margin-bottom: 1rem;
 }
 
-.single-meal-preview-title,
-.single-category-title {
+.single-meal-preview-title {
   width: 15rem;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -148,6 +147,7 @@ button {
   font-size: 1.4rem;
   background-color: rgb(149, 69, 193);
   margin-top: 0px;
+  margin-bottom: none;
   transition-duration: 0.2s;
 }
 
