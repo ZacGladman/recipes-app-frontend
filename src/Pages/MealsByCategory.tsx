@@ -40,7 +40,13 @@ export default function MealsByCategory(): JSX.Element {
             </p>
           </Link>
           <p className="title-meals-by-category-or-nation">{cat}</p>
+        </div>
         <div className="ctn-meal-previews">
+          {meals.map((oneMeal) => {
+            return <MealPreviewA meal={oneMeal} key={oneMeal.idMeal} />;
+          })}
+        </div>
+      </div>
     );
   } else {
     return (
