@@ -3,18 +3,18 @@ import Meal from "../utils/interfaces/IMeal";
 import ICategory from "../utils/interfaces/ICategory";
 import INationality from "../utils/interfaces/INationality";
 import OneCategory from "../components/oneCategory";
-import Ingredient from "../utils/interfaces/Ingredient";
 import IMealByIngredientOrNationOrCategory from "../utils/interfaces/IMealByIngredientOrNationOrCat";
-import MealPreview from "../components/MealPreview";
+import MealPreviewA from "../components/MealPreviewA";
 import { Link } from "react-router-dom";
 
 interface MealSearchProps {
   selectedMeal: Meal | null;
   setSelectedMeal: React.Dispatch<React.SetStateAction<Meal | null>>;
+  navSelection: string;
+  setNavSelection: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function MealSearch(props: MealSearchProps): JSX.Element {
-  const [ingredients, setIngredients] = useState<{ meals: Ingredient[] }>();
   const [mealsByIngredient, setMealsByIngredient] = useState<
     IMealByIngredientOrNationOrCategory[] | null
   >(null);
@@ -23,18 +23,11 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
 
   const [searchedMeals, setSearchedMeals] = useState<Meal[] | null>();
   const [searchInput, setSearchInput] = useState<string>("");
-  const [navSelection, setNavSelection] = useState<
-    "meal-search" | "category" | "main-ingredient" | "nationality" | "random"
-  >("meal-search");
+
+  const navSelection = props.navSelection;
+  const setNavSelection = props.setNavSelection;
 
   useEffect(() => {
-    async function fetchIngredients() {
-      const response = await fetch(
-        "https://www.themealdb.com/api/json/v1/1/list.php?i=list"
-      );
-      const jsonBody = await response.json();
-      setIngredients(jsonBody);
-    }
     async function fetchCategories() {
       const response = await fetch(
         "https://www.themealdb.com/api/json/v1/1/categories.php"
@@ -49,8 +42,6 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
       const jsonBody = await response.json();
       setNationalities(jsonBody);
     }
-
-    fetchIngredients();
     fetchCategories();
     fetchNationalities();
   }, []);
@@ -93,10 +84,8 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
 
   const handleSubmitSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (navSelection === "meal-search") {
+    if (navSelection === "dish-name") {
       await fetchSearchedMeals(searchInput);
-    } else if (navSelection === "nationality") {
-      console.log("nationality search");
     } else {
       await fetchByMainIngredient(searchInput);
       console.log(mealsByIngredient);
@@ -106,52 +95,97 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
 
   return (
     <>
-      <nav>
-        <button onClick={() => setNavSelection("meal-search")}>
-          meal search
-        </button>
-        <button onClick={() => setNavSelection("category")}>category</button>
-        <button onClick={() => setNavSelection("main-ingredient")}>
-          main ingredient
-        </button>
-        <button onClick={() => setNavSelection("nationality")}>
-          nationality
-        </button>
+      <div className="ctn-meal-search-options">
+        <select
+          className="ctn-meal-search-dropdown"
+          value={navSelection}
+          onChange={(event) => setNavSelection(event.target.value)}
+        >
+          <option value="" disabled selected>
+            search option
+          </option>
+          <option className="dropdown-option" value="dish-name">
+            dish name
+          </option>
+          <option className="dropdown-option" value="main-ingredient">
+            contains ingredient
+          </option>
+          <option className="dropdown-option" value="category">
+            category
+          </option>
+          <option className="dropdown-option" value="nationality">
+            place of origin
+          </option>
+        </select>
+        {(navSelection === "dish-name" ||
+          navSelection === "main-ingredient") && (
+          <form
+            onSubmit={async (e) => {
+              await handleSubmitSearch(e);
+            }}
+            className="meal-search-form"
+          >
+            <input
+              className="meal-search-form-search-bar"
+              type="text"
+              placeholder="search"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+            />
+          </form>
+        )}
         <Link to="/meal-search/random">
           <button
             onClick={async () => {
               setNavSelection("random");
               await fetchRandomMeal();
             }}
+            className="btn-random"
           >
-            random
+            I'm feeling lucky
           </button>
         </Link>
-      </nav>
-      {(navSelection === "meal-search" ||
-        navSelection === "main-ingredient" ||
-        navSelection === "nationality") && (
-        <form
-          onSubmit={async (e) => {
-            await handleSubmitSearch(e);
-          }}
-        >
-          <input
-            type="text"
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-          />
-        </form>
-      )}
-      {navSelection === "category" &&
-        categories?.categories.map((oneCat) => (
-          <OneCategory category={oneCat} key={oneCat.idCategory} />
-        ))}
+      </div>
 
       {navSelection === "main-ingredient" && mealsByIngredient && (
-        <div className="ctn-meal-preview">
-          {mealsByIngredient.map((oneMeal) => (
-            <MealPreview meal={oneMeal} key={oneMeal.idMeal} />
+        <>
+          <div className="ctn-meal-previews">
+            {mealsByIngredient.map((oneMeal) => (
+              <MealPreviewA meal={oneMeal} key={oneMeal.idMeal} />
+            ))}
+          </div>
+        </>
+      )}
+
+      {navSelection === "dish-name" && searchedMeals && (
+        <div className="ctn-meal-previews">
+          {searchedMeals.map((oneMeal) => (
+            <MealPreviewA meal={oneMeal} key={oneMeal.idMeal} />
+          ))}
+        </div>
+      )}
+
+      {navSelection === "category" && (
+        <div className="categories-view">
+          <div className="ctn-categories-list">
+            {categories?.categories.map((oneCat) => (
+              <OneCategory category={oneCat} key={oneCat.idCategory} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {navSelection === "nationality" && nationalies && (
+        <div className="ctn-nationalities">
+          {nationalies.meals.map((oneNationality) => (
+            <Link
+              to={`../meal-search/nationality/${oneNationality.strArea}`}
+              key={oneNationality.strArea}
+            >
+              <button className="color-change-4x">
+                {oneNationality.strArea}
+              </button>
+            </Link>
           ))}
         </div>
       )}

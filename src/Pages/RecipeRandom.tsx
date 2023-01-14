@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import Meal from "../utils/interfaces/IMeal";
-import Recipe from "./Recipe";
-import { MdAutorenew } from "react-icons/md";
+import Recipe from "../components/Recipe";
 
 interface RandomRecipeProps {
   meal: Meal | null;
@@ -26,7 +25,10 @@ export default function RecipeRandom(props: RandomRecipeProps): JSX.Element {
 
   return (
     <>
-      <MdAutorenew onClick={() => fetchRandomMeal()} />
+      <button className="btn-new-random-meal" onClick={() => fetchRandomMeal()}>
+        new
+      </button>
+
       <Recipe meal={meal} />
     </>
   );
