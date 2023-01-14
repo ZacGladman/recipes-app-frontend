@@ -22,7 +22,10 @@ function App(): JSX.Element {
           {!signedInUserID && (
             <button
               className="btn-sign-in"
-              onClick={() => window.alert("not yet implemented")}
+              onClick={() => {
+                window.alert("not yet implemented");
+                setSignedInUserID(undefined);
+              }}
             >
               sign in
             </button>
