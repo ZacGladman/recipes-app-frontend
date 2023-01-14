@@ -188,6 +188,16 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
         </div>
       )}
 
+      {navSelection === "category" && (
+        <div className="categories-view">
+          <div className="ctn-categories-list">
+            {categories?.categories.map((oneCat) => (
+              <OneCategory category={oneCat} key={oneCat.idCategory} />
+            ))}
+          </div>
+        </div>
+      )}
+
       {navSelection === "nationality" && nationalies && (
         <>
           <button onClick={() => setNavSelection("dish-name")}>home</button>
