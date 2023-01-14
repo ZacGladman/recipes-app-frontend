@@ -12,16 +12,7 @@ export default function OneCategory(props: IOneCategory): JSX.Element {
       to={`/meal-search/categories/${category.strCategory}`}
       style={{ textDecoration: "none" }}
     >
-      <div className="ctn-single-category">
-        {category.strCategoryThumb && (
-          <img
-            src={category.strCategoryThumb}
-            alt="category pic"
-            className="single-category-image"
-          />
-        )}
-        <p className="single-category-title">{category.strCategory}</p>
-      </div>
+      <p className="color-change-3x">{category.strCategory}</p>
     </Link>
   );
 }
