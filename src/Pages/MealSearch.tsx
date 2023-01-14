@@ -3,7 +3,6 @@ import Meal from "../utils/interfaces/IMeal";
 import ICategory from "../utils/interfaces/ICategory";
 import INationality from "../utils/interfaces/INationality";
 import OneCategory from "../components/oneCategory";
-import Ingredient from "../utils/interfaces/Ingredient";
 import IMealByIngredientOrNationOrCategory from "../utils/interfaces/IMealByIngredientOrNationOrCat";
 import MealPreviewA from "../components/MealPreviewA";
 import { Link } from "react-router-dom";
@@ -16,7 +15,6 @@ interface MealSearchProps {
 }
 
 export default function MealSearch(props: MealSearchProps): JSX.Element {
-  const [ingredients, setIngredients] = useState<{ meals: Ingredient[] }>();
   const [mealsByIngredient, setMealsByIngredient] = useState<
     IMealByIngredientOrNationOrCategory[] | null
   >(null);
@@ -30,13 +28,6 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
   const setNavSelection = props.setNavSelection;
 
   useEffect(() => {
-    async function fetchIngredients() {
-      const response = await fetch(
-        "https://www.themealdb.com/api/json/v1/1/list.php?i=list"
-      );
-      const jsonBody = await response.json();
-      setIngredients(jsonBody);
-    }
     async function fetchCategories() {
       const response = await fetch(
         "https://www.themealdb.com/api/json/v1/1/categories.php"
@@ -51,8 +42,6 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
       const jsonBody = await response.json();
       setNationalities(jsonBody);
     }
-
-    fetchIngredients();
     fetchCategories();
     fetchNationalities();
   }, []);
