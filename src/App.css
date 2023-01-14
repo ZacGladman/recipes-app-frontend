@@ -261,4 +261,13 @@ button {
   margin-right: 15rem;
 }
 
+.btn-one-nationality {
+  font-size: 2rem;
+  margin-top: 6rem;
+  margin-bottom: none;
+  color: white;
+  background-color: rgb(149, 69, 193);
+  padding-left: 1rem;
+}
+
   transition-duration: 0.4s;
