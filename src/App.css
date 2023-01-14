@@ -151,8 +151,17 @@ button {
 }
 
 .ctn-recipe-instructions {
-  width: 60%;
+  /* width: 60%; */
   line-height: 1.2rem;
+  grid-area: txt;
+  align-self: center;
+  justify-self: center;
+  font-size: 1.1rem;
+  line-height: 1.75rem;
+  margin-left: 7.5rem;
+  margin-right: 7.5rem;
+  margin-top: 3rem;
+}
 }
 
 /* ============================================= RANDOM RECIPE COMPONENT */
