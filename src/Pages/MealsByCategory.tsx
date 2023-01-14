@@ -29,12 +29,10 @@ export default function MealsByCategory(): JSX.Element {
 
   if (meals) {
     return (
-      <>
-        <p>{cat}</p>
-        {meals.map((oneMeal) => {
-          return <MealPreviewA meal={oneMeal} key={oneMeal.idMeal} />;
-        })}
-      </>
+      <div className="ctn-meals-by-category-or-nation">
+        <div className="ctn-meals-by-category-or-nation-banner">
+          <p className="title-meals-by-category-or-nation">{cat}</p>
+        <div className="ctn-meal-previews">
     );
   } else {
     return (
