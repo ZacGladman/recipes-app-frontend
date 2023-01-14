@@ -14,6 +14,9 @@ export default function Recipe(props: RecipeProps): JSX.Element {
     return (
       <>
         <h1>{meal.strMeal}</h1>
+        <Link to="../meal-search/">
+          <p>↩</p>
+        </Link>
         <Link to={`../meal-search/categories/${meal.strCategory}`}>
           <p>{meal.strCategory}</p>
         </Link>
