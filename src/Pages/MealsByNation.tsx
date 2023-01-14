@@ -30,10 +30,22 @@ export default function MealsByNation(): JSX.Element {
   if (meals) {
     return (
       <>
-        <p>{nation}</p>
-        {meals.map((oneMeal) => {
-          return <MealPreviewA meal={oneMeal} key={oneMeal.idMeal} />;
-        })}
+        <div className="ctn-meals-by-category-or-nation-banner">
+          <Link to="/meal-search" style={{ textDecoration: "none" }}>
+            <p
+              className="btn-back-to-meal-previews"
+              onClick={() => setNavSelection("nationality")}
+            >
+              ↩
+            </p>
+          </Link>
+          <p className="title-meals-by-category-or-nation">{nation}</p>
+        </div>
+        <div className="ctn-meal-previews">
+          {meals.map((oneMeal) => {
+            return <MealPreviewA meal={oneMeal} key={oneMeal.idMeal} />;
+          })}
+        </div>
       </>
     );
   } else {
