@@ -43,6 +43,7 @@ function App(): JSX.Element {
             className={({ isActive }) =>
               isActive ? "active-navbar-link" : "navbar-link"
             }
+            onClick={() => setNavSelection("dish-name")}
           >
             meal search
           </NavLink>
