@@ -186,10 +186,18 @@ button {
   font-size: 1.15rem;
 }
 
-.ctn-recipe-avg-rating {
+.ctn-recipe-avg-rating-and-tags {
   grid-area: AvRtn;
   text-align: center;
   margin-block-end: 4rem;
+}
+.ctn-recipe-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.recipe-category {
+  margin-right: 1rem;
 }
 
 .recipe-avg-rating-text {
