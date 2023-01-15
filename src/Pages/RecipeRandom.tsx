@@ -24,12 +24,11 @@ export default function RecipeRandom(props: RandomRecipeProps): JSX.Element {
   }, [meal, fetchRandomMeal]);
 
   return (
-    <>
+    <div className="ctn-random-recipe">
       <button className="btn-new-random-meal" onClick={() => fetchRandomMeal()}>
-        new
+        new random meal
       </button>
-
       <Recipe meal={meal} />
-    </>
+    </div>
   );
 }
