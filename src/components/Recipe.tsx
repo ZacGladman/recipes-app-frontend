@@ -29,7 +29,7 @@ export default function Recipe(props: RecipeProps): JSX.Element {
           </Link>
           <p className="recipe-title">{meal.strMeal}</p>
         </div>
-        <div className="ctn-recipe-avg-rating">
+        <div className="ctn-recipe-avg-rating-and-tags">
           <p className="recipe-avg-rating-text">average rating</p>
           <Rating
             onClick={handleRating}
@@ -37,10 +37,21 @@ export default function Recipe(props: RecipeProps): JSX.Element {
             readonly={true}
             className="recipe-avg-rating"
           />
+          <div className="ctn-recipe-tags">
+            <Link
+              to={`../meal-search/categories/${meal.strCategory}`}
+              style={{ textDecoration: "none" }}
+            >
+              <p className="recipe-category">{meal.strCategory}</p>
+            </Link>
+            <Link
+              to={`../meal-search/nationality/${meal.strArea}`}
+              style={{ textDecoration: "none" }}
+            >
+              <p className="recipe-nationality">{meal.strArea}</p>
+            </Link>
+          </div>
         </div>
-        <Link to={`../meal-search/categories/${meal.strCategory}`}>
-          <p className="recipe-category">{meal.strCategory}</p>
-        </Link>
         <div className="recipe-actions-sidebox">
           <Rating
             onClick={handleRating}
