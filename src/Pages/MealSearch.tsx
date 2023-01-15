@@ -101,7 +101,7 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
           value={navSelection}
           onChange={(event) => setNavSelection(event.target.value)}
         >
-          <option value="" disabled selected>
+          <option value="" selected disabled>
             search option
           </option>
           <option className="dropdown-option" value="dish-name">
