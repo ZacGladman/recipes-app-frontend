@@ -9,31 +9,57 @@ import RecipeWithParams from "./Pages/RecipeWithParams";
 import RecipeRandom from "./Pages/RecipeRandom";
 import MealsByCategory from "./Pages/MealsByCategory";
 import MealsByNation from "./Pages/MealsByNation";
+import { auth, googleAuthProvider } from "./configureFirebase";
+import { signInWithPopup } from "firebase/auth";
 
 function App(): JSX.Element {
-  const [signedInUserID, setSignedInUserID] = useState<number | undefined>();
+  const [signedInUserID, setSignedInUserID] = useState<string | null>();
+  const [signedInUserImg, setSignedInUserImg] = useState<string | null>();
+  const [signedInUserName, setSignedInUserName] = useState<string | null>();
   const [selectedMeal, setSelectedMeal] = useState<Meal | null>(null);
   const [navSelection, setNavSelection] = useState<string>("dish-name");
+
+  const handleSignInClicked = async () => {
+    const userCredential = await signInWithPopup(auth, googleAuthProvider);
+    const signedInUser = userCredential.user;
+    console.log(signedInUser);
+    setSignedInUserID(signedInUser.email);
+    setSignedInUserImg(signedInUser.photoURL);
+    setSignedInUserName(signedInUser.displayName);
+  };
+
+  const handleSignOutClicked = async () => {
+    await auth.signOut();
+    setSignedInUserID(null);
+    setSignedInUserImg(null);
+    setSignedInUserName(null);
+  };
   return (
     <>
       <nav className="navbar-upper">
         <p className="page-title">chefbook</p>
         <div className="nav-bar-subtitles">
           {!signedInUserID && (
-            <button
-              className="btn-sign-in"
-              onClick={() => {
-                window.alert("not yet implemented");
-                setSignedInUserID(undefined);
-              }}
-            >
+            <button className="btn-sign-in" onClick={handleSignInClicked}>
               sign in
             </button>
           )}
+          <div className="nav-user-details">
+            {signedInUserImg && (
+              <img
+                src={signedInUserImg}
+                alt="profile pic"
+                className="navbar-user-profile-pic"
+              />
+            )}
+            {signedInUserName && (
+              <p className="navbar-username">{signedInUserName}</p>
+            )}
+          </div>
           <NavLink
             to="/reviews"
             className={({ isActive }) =>
-              isActive ? "active-navbar-link" : "navbar-link"
+              isActive ? "active-reviews-link" : "reviews-link"
             }
           >
             reviews
@@ -41,13 +67,17 @@ function App(): JSX.Element {
           <NavLink
             to="/meal-search"
             className={({ isActive }) =>
-              isActive ? "active-navbar-link" : "navbar-link"
+              isActive ? "active-mealsearch-link" : "mealsearch-link"
             }
             onClick={() => setNavSelection("dish-name")}
           >
             meal search
           </NavLink>
-          {signedInUserID && <button className="btn-sign-out">sign out</button>}
+          {signedInUserID && (
+            <button className="btn-sign-out" onClick={handleSignOutClicked}>
+              sign out
+            </button>
+          )}
         </div>
       </nav>
       <Routes>
