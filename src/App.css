@@ -7,7 +7,8 @@ button {
 }
 /* ============================================= NAVBAR */
 .navbar-upper {
-  display: flex;
+  display: grid;
+  grid-template: "title signInOrUserDetails reviews mealsearch signOut";
   background-color: rgb(149, 69, 193);
   color: white;
   align-items: baseline;
@@ -20,10 +21,13 @@ button {
   margin-bottom: 0;
   margin-top: 0;
   padding-left: 3.5rem;
+  grid-area: title;
 }
 
-.active-navbar-link,
-.navbar-link {
+.active-reviews-link,
+.active-mealsearch-link,
+.reviews-link,
+.mealsearch-link {
   text-decoration: none;
   color: white;
   padding-left: 0.75rem;
@@ -31,13 +35,24 @@ button {
   transition-duration: 0.2s;
 }
 
-.active-navbar-link {
+.active-reviews-link,
+.active-mealsearch-link {
   font-weight: bolder;
   font-size: 2.4rem;
 }
 
-.navbar-link {
+.reviews-link,
+.mealsearch-link {
   font-size: 1.7rem;
+}
+
+.reviews-link,
+.active-reviews-link {
+  grid-area: reviews;
+}
+.mealsearch-link,
+.active-mealsearch-link {
+  grid-area: mealsearch;
 }
 
 .navbar-link:hover,
@@ -52,11 +67,36 @@ button {
   background-color: inherit;
   font-size: 1.7rem;
   color: white;
-  padding-left: 3rem;
   padding-right: 0.75rem;
   font-family: "Josefin Sans", sans-serif;
   border: none;
   transition-duration: 0.2s;
+}
+.btn-sign-in {
+  padding-left: 3rem;
+  grid-area: signInOrUserDetails;
+}
+.btn-sign-out {
+  padding-left: 1rem;
+  grid-area: signOut;
+}
+.nav-user-details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  grid-area: signInOrUserDetails;
+}
+
+.navbar-user-profile-pic {
+  height: 3rem;
+  border-radius: 50%;
+}
+.navbar-username {
+  margin-left: 1rem;
+  font-size: 1.5rem;
+  justify-self: baseline;
+  width: fit-content;
+  margin-block-end: 0;
 }
 
 /* ============================================= MEAL-SEARCH NAVBAR */
