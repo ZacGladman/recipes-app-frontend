@@ -137,7 +137,7 @@ export default function MealSearch(props: MealSearchProps): JSX.Element {
         <Link to="/meal-search/random">
           <button
             onClick={async () => {
-              setNavSelection("random");
+              setNavSelection("dish-name");
               await fetchRandomMeal();
             }}
             className="btn-random"
