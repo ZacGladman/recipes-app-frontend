@@ -3,9 +3,11 @@ import createIngredientsAndQuantsArray from "../utils/createIngredientsAndQuants
 import { Link } from "react-router-dom";
 import createInstructionsParagraph from "../utils/createInstructionsParagraph";
 import { Rating } from "react-simple-star-rating";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdOutlinePlaylistAdd } from "react-icons/md";
 import { MdAddComment } from "react-icons/md";
+import axios from "axios";
+import { baseURL } from "../index";
 
 interface RecipeProps {
   meal: Meal | null;
