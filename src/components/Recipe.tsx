@@ -16,10 +16,21 @@ interface RecipeProps {
 export default function Recipe(props: RecipeProps): JSX.Element {
   const meal = props.meal;
   const [rating, setRating] = useState(0);
-  console.log(rating);
   const handleRating = (rate: number) => {
     setRating(rate);
   };
+
+  useEffect(() => {
+    const postRecipeToDB = async () => {
+      const body = {
+        recipe_api_id: meal?.idMeal,
+        recipe_name: meal?.strMeal,
+        recipe_img_url: meal?.strMealThumb,
+      };
+      await axios.post(`${baseURL}/recipes`, body);
+    };
+    postRecipeToDB();
+  }, [meal?.idMeal, meal?.strMeal, meal?.strMealThumb]);
 
   if (meal) {
     const ingredientsAndQuantsArray = createIngredientsAndQuantsArray(meal);
