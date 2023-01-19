@@ -28,6 +28,12 @@ function App(): JSX.Element {
     setSignedInUserID(signedInUser.email);
     setSignedInUserImg(signedInUser.photoURL);
     setSignedInUserName(signedInUser.displayName);
+    const postBody = {
+      username: signedInUser.displayName,
+      userEmail: signedInUser.email,
+      profilePic: signedInUser.photoURL,
+    };
+    await axios.post(`${baseURL}/users`, postBody);
   };
 
   const handleSignOutClicked = async () => {
