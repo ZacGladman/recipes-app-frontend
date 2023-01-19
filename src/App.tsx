@@ -11,6 +11,7 @@ import MealsByCategory from "./Pages/MealsByCategory";
 import MealsByNation from "./Pages/MealsByNation";
 import { auth, googleAuthProvider } from "./configureFirebase";
 import { signInWithPopup } from "firebase/auth";
+import axios from "axios";
 
 function App(): JSX.Element {
   const [signedInUserID, setSignedInUserID] = useState<string | null>();
