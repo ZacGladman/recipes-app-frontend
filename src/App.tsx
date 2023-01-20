@@ -106,10 +106,15 @@ function App(): JSX.Element {
           path="/meal-search/main-ingredient/:ingredient"
           element={<h1>ingredient</h1>}
         />
-        <Route path="/meal-search/:id" element={<RecipeWithParams />} />
+        <Route
+          path="/meal-search/:id"
+          element={<RecipeWithParams signedInUserID={signedInUserID} />}
+        />
         <Route
           path="/meal-search/random"
-          element={<RecipeRandom meal={selectedMeal} />}
+          element={
+            <RecipeRandom meal={selectedMeal} signedInUserID={signedInUserID} />
+          }
         />
         <Route
           path="/meal-search/categories/:cat"
