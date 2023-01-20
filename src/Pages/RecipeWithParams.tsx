@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Meal from "../utils/interfaces/IMeal";
-import Recipe from "../components/Recipe";
+import FullRecipe from "../components/FullRecipe";
+import RecipeNoUserSignedIn from "../components/RecipeNoSignedInUser";
 
-export default function RecipeWithParams(): JSX.Element {
+interface IRecipeWithParams {
+  signedInUserID: string | null | undefined;
+}
+
+export default function RecipeWithParams({
+  signedInUserID,
+}: IRecipeWithParams): JSX.Element {
   const [meal, setMeal] = useState<Meal>();
 
   const { id } = useParams();
@@ -19,7 +26,11 @@ export default function RecipeWithParams(): JSX.Element {
   }, [endpoint]);
 
   if (meal) {
-    return <Recipe meal={meal} />;
+    return signedInUserID ? (
+      <FullRecipe meal={meal} />
+    ) : (
+      <RecipeNoUserSignedIn meal={meal} />
+    );
   } else {
     return <></>;
   }

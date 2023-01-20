@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import Meal from "../utils/interfaces/IMeal";
-import Recipe from "../components/Recipe";
+import FullRecipe from "../components/FullRecipe";
+import RecipeNoUserSignedIn from "../components/RecipeNoSignedInUser";
 
 interface RandomRecipeProps {
   meal: Meal | null;
+  signedInUserID: string | null | undefined;
 }
 
 export default function RecipeRandom(props: RandomRecipeProps): JSX.Element {
@@ -28,7 +30,11 @@ export default function RecipeRandom(props: RandomRecipeProps): JSX.Element {
       <button className="btn-new-random-meal" onClick={() => fetchRandomMeal()}>
         new random meal
       </button>
-      <Recipe meal={meal} />
+      {props.signedInUserID ? (
+        <FullRecipe meal={meal} />
+      ) : (
+        <RecipeNoUserSignedIn meal={meal} />
+      )}
     </div>
   );
 }
