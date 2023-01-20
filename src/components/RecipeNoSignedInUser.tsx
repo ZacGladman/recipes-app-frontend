@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import createInstructionsParagraph from "../utils/createInstructionsParagraph";
 import { Rating } from "react-simple-star-rating";
 import { useEffect, useState } from "react";
-import { MdOutlinePlaylistAdd } from "react-icons/md";
-import { MdAddComment } from "react-icons/md";
 import axios from "axios";
 import { baseURL } from "../index";
 
@@ -13,7 +11,7 @@ interface RecipeProps {
   meal: Meal | null;
 }
 
-export default function Recipe(props: RecipeProps): JSX.Element {
+export default function RecipeNoUserSignedIn(props: RecipeProps): JSX.Element {
   const meal = props.meal;
   const [rating, setRating] = useState(0);
   const handleRating = (rate: number) => {
@@ -35,14 +33,14 @@ export default function Recipe(props: RecipeProps): JSX.Element {
   if (meal) {
     const ingredientsAndQuantsArray = createIngredientsAndQuantsArray(meal);
     return (
-      <div className="ctn-recipe">
-        <div className="ctn-recipe-title">
+      <div className="ctn-recipe-no-user">
+        <div className="ctn-recipe-title-no-user">
           <Link to="../meal-search/" style={{ textDecoration: "none" }}>
             <p className="recipe-back-btn">↩</p>
           </Link>
           <p className="recipe-title">{meal.strMeal}</p>
         </div>
-        <div className="ctn-recipe-avg-rating-and-tags">
+        <div className="ctn-recipe-avg-rating-and-tags-no-user">
           <p className="recipe-avg-rating-text">average rating</p>
           <Rating
             onClick={handleRating}
@@ -65,33 +63,14 @@ export default function Recipe(props: RecipeProps): JSX.Element {
             </Link>
           </div>
         </div>
-        <div className="recipe-actions-sidebox">
-          <Rating
-            onClick={handleRating}
-            allowFraction={true}
-            className="recipe-rating-input"
-            fillColor={"#9545c1"}
-          />
-          <p className="recipe-rate">quick rate</p>
-          <button
-            className="recipe-review-btn"
-            onClick={() => window.alert("not yet implemented")}
-          >
-            <MdAddComment className="recipe-review-btn-icon" />
-            write a review
-          </button>
-          <button
-            className="recipe-add-to-cooklist-btn"
-            onClick={() => window.alert("not yet implemented")}
-          >
-            <MdOutlinePlaylistAdd className="add-to-cooklist-icon" />
-            add to cooklist
-          </button>
-        </div>
         {meal.strMealThumb && (
-          <img src={meal.strMealThumb} alt="" className="recipe-image" />
+          <img
+            src={meal.strMealThumb}
+            alt=""
+            className="recipe-image-no-user"
+          />
         )}
-        <div className="ctn-recipe-ingredients">
+        <div className="ctn-recipe-ingredients-no-user">
           <p className="recipe-ingredients-title">Ingredients</p>
           {ingredientsAndQuantsArray.map((element) => {
             return (
@@ -102,7 +81,7 @@ export default function Recipe(props: RecipeProps): JSX.Element {
             );
           })}
         </div>
-        <div className="ctn-recipe-instructions">
+        <div className="ctn-recipe-instructions-no-user">
           <p className="recipe-instructions-title">Instructions</p>
           <div className="ctn-recipe-instructions-paragraphs">
             {meal.strInstructions ? (
