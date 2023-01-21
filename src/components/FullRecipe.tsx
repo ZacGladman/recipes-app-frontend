@@ -44,6 +44,16 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
         setCooklistID(data[0].cooklist_id);
       }
     };
+    const fetchRating = async () => {
+      const { data } = await axios.get(
+        `${baseURL}/reviews/recipe/${meal?.idMeal}/user/${signedInUserID}`
+      );
+      if (data.length > 0) {
+        props.setFetchedRating(Number(data[0].rating_value));
+      } else {
+        props.setFetchedRating(null);
+      }
+    };
     const postRecipeToDB = async () => {
       const body = {
         recipe_api_id: meal?.idMeal,
