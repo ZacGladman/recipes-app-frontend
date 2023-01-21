@@ -30,6 +30,9 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
     );
     setCooklistID(data.cooklist_id);
   };
+  const handleRemoveFromCooklistClicked = async () => {
+    await axios.delete(`${baseURL}/cooklist/${cooklistID}`);
+    setCooklistID(null);
   };
 
   useEffect(() => {
