@@ -5,11 +5,13 @@ import RecipeNoUserSignedIn from "../components/RecipeNoSignedInUser";
 
 interface RandomRecipeProps {
   meal: Meal | null;
-  signedInUserID: string | null | undefined;
+  signedInUserEmail: string | null | undefined;
+  signedInUserID: number | null;
 }
 
 export default function RecipeRandom(props: RandomRecipeProps): JSX.Element {
   const [meal, setMeal] = useState(props.meal);
+  const [fetchedRating, setFetchedRating] = useState<number | null>(null);
 
   const fetchRandomMeal = useCallback(async () => {
     const response = await fetch(
@@ -27,11 +29,22 @@ export default function RecipeRandom(props: RandomRecipeProps): JSX.Element {
 
   return (
     <div className="ctn-random-recipe">
-      <button className="btn-new-random-meal" onClick={() => fetchRandomMeal()}>
+      <button
+        className="btn-new-random-meal"
+        onClick={() => {
+          setFetchedRating(null);
+          fetchRandomMeal();
+        }}
+      >
         new random meal
       </button>
-      {props.signedInUserID ? (
-        <FullRecipe meal={meal} />
+      {props.signedInUserEmail ? (
+        <FullRecipe
+          meal={meal}
+          signedInUserID={props.signedInUserID}
+          fetchedRating={fetchedRating}
+          setFetchedRating={setFetchedRating}
+        />
       ) : (
         <RecipeNoUserSignedIn meal={meal} />
       )}
