@@ -36,6 +36,14 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
   };
 
   useEffect(() => {
+    const fetchCooklistStatus = async () => {
+      const { data } = await axios.get(
+        `${baseURL}/user/${signedInUserID}/cooklist/recipe/${meal?.idMeal}`
+      );
+      if (data.length > 0) {
+        setCooklistID(data[0].cooklist_id);
+      }
+    };
     const postRecipeToDB = async () => {
       const body = {
         recipe_api_id: meal?.idMeal,
