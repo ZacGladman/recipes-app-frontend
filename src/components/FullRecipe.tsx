@@ -3,21 +3,74 @@ import createIngredientsAndQuantsArray from "../utils/createIngredientsAndQuants
 import { Link } from "react-router-dom";
 import createInstructionsParagraph from "../utils/createInstructionsParagraph";
 import { Rating } from "react-simple-star-rating";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdOutlinePlaylistAdd } from "react-icons/md";
 import { MdAddComment } from "react-icons/md";
+import axios from "axios";
+import { baseURL } from "../index";
 
 interface RecipeProps {
   meal: Meal | null;
+  signedInUserID: number | null;
+  fetchedRating: number | null;
+  setFetchedRating: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
-export default function Recipe(props: RecipeProps): JSX.Element {
+export default function FullRecipe(props: RecipeProps): JSX.Element {
   const meal = props.meal;
-  const [rating, setRating] = useState(0);
-  console.log(rating);
-  const handleRating = (rate: number) => {
-    setRating(rate);
+  const signedInUserID = props.signedInUserID;
+  const [cooklistID, setCooklistID] = useState<number | null>(null);
+  const handleRating = async (rate: number) => {
+    await axios.post(
+      `${baseURL}/reviews/new-quick/recipe/${meal?.idMeal}/user/${signedInUserID}`,
+      { rating_value: rate }
+    );
   };
+  const handleAddToCooklistClicked = async () => {
+    const { data } = await axios.post(
+      `${baseURL}/user/${signedInUserID}/cooklist/new`,
+      {
+        recipe_api_id: meal?.idMeal,
+      }
+    );
+    setCooklistID(data.cooklist_id);
+  };
+  const handleRemoveFromCooklistClicked = async () => {
+    await axios.delete(`${baseURL}/cooklist/${cooklistID}`);
+    setCooklistID(null);
+  };
+
+  useEffect(() => {
+    const fetchCooklistStatus = async () => {
+      const { data } = await axios.get(
+        `${baseURL}/user/${signedInUserID}/cooklist/recipe/${meal?.idMeal}`
+      );
+      if (data.length > 0) {
+        setCooklistID(data[0].cooklist_id);
+      }
+    };
+    const fetchRating = async () => {
+      const { data } = await axios.get(
+        `${baseURL}/reviews/recipe/${meal?.idMeal}/user/${signedInUserID}`
+      );
+      if (data.length > 0) {
+        props.setFetchedRating(Number(data[0].rating_value));
+      } else {
+        props.setFetchedRating(null);
+      }
+    };
+    const postRecipeToDB = async () => {
+      const body = {
+        recipe_api_id: meal?.idMeal,
+        recipe_name: meal?.strMeal,
+        recipe_img_url: meal?.strMealThumb,
+      };
+      await axios.post(`${baseURL}/recipes`, body);
+    };
+    postRecipeToDB();
+    fetchCooklistStatus();
+    fetchRating();
+  }, [meal?.idMeal, meal?.strMeal, meal?.strMealThumb, signedInUserID, props]);
 
   if (meal) {
     const ingredientsAndQuantsArray = createIngredientsAndQuantsArray(meal);
@@ -32,7 +85,6 @@ export default function Recipe(props: RecipeProps): JSX.Element {
         <div className="ctn-recipe-avg-rating-and-tags">
           <p className="recipe-avg-rating-text">average rating</p>
           <Rating
-            onClick={handleRating}
             allowFraction={true}
             readonly={true}
             className="recipe-avg-rating"
@@ -53,12 +105,24 @@ export default function Recipe(props: RecipeProps): JSX.Element {
           </div>
         </div>
         <div className="recipe-actions-sidebox">
-          <Rating
-            onClick={handleRating}
-            allowFraction={true}
-            className="recipe-rating-input"
-            fillColor={"#9545c1"}
-          />
+          {props.fetchedRating ? (
+            <Rating
+              initialValue={props.fetchedRating}
+              onClick={handleRating}
+              allowFraction={true}
+              className="recipe-rating-input"
+              fillColor={"#9545c1"}
+            />
+          ) : (
+            <Rating
+              initialValue={0}
+              onClick={handleRating}
+              allowFraction={true}
+              className="recipe-rating-input"
+              fillColor={"#878787fb"}
+            />
+          )}
+
           <p className="recipe-rate">quick rate</p>
           <button
             className="recipe-review-btn"
@@ -67,13 +131,23 @@ export default function Recipe(props: RecipeProps): JSX.Element {
             <MdAddComment className="recipe-review-btn-icon" />
             write a review
           </button>
-          <button
-            className="recipe-add-to-cooklist-btn"
-            onClick={() => window.alert("not yet implemented")}
-          >
-            <MdOutlinePlaylistAdd className="add-to-cooklist-icon" />
-            add to cooklist
-          </button>
+          {cooklistID ? (
+            <button
+              className="recipe-add-to-cooklist-btn"
+              onClick={handleRemoveFromCooklistClicked}
+            >
+              <MdOutlinePlaylistAdd className="add-to-cooklist-icon" />
+              remove from cooklist
+            </button>
+          ) : (
+            <button
+              className="recipe-add-to-cooklist-btn"
+              onClick={handleAddToCooklistClicked}
+            >
+              <MdOutlinePlaylistAdd className="add-to-cooklist-icon" />
+              add to cooklist
+            </button>
+          )}
         </div>
         {meal.strMealThumb && (
           <img src={meal.strMealThumb} alt="" className="recipe-image" />

@@ -1,10 +1,20 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Meal from "../utils/interfaces/IMeal";
-import Recipe from "../components/Recipe";
+import FullRecipe from "../components/FullRecipe";
+import RecipeNoUserSignedIn from "../components/RecipeNoSignedInUser";
 
-export default function RecipeWithParams(): JSX.Element {
+interface IRecipeWithParams {
+  signedInUserEmail: string | null | undefined;
+  signedInUserID: number | null;
+}
+
+export default function RecipeWithParams({
+  signedInUserEmail,
+  signedInUserID,
+}: IRecipeWithParams): JSX.Element {
   const [meal, setMeal] = useState<Meal>();
+  const [fetchedRating, setFetchedRating] = useState<number | null>(null);
 
   const { id } = useParams();
   const endpoint = "https://themealdb.com/api/json/v1/1/lookup.php?i=" + id;
@@ -19,7 +29,16 @@ export default function RecipeWithParams(): JSX.Element {
   }, [endpoint]);
 
   if (meal) {
-    return <Recipe meal={meal} />;
+    return signedInUserEmail ? (
+      <FullRecipe
+        meal={meal}
+        signedInUserID={signedInUserID}
+        fetchedRating={fetchedRating}
+        setFetchedRating={setFetchedRating}
+      />
+    ) : (
+      <RecipeNoUserSignedIn meal={meal} />
+    );
   } else {
     return <></>;
   }

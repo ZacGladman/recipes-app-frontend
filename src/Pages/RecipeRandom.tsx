@@ -1,13 +1,17 @@
 import { useCallback, useEffect, useState } from "react";
 import Meal from "../utils/interfaces/IMeal";
-import Recipe from "../components/Recipe";
+import FullRecipe from "../components/FullRecipe";
+import RecipeNoUserSignedIn from "../components/RecipeNoSignedInUser";
 
 interface RandomRecipeProps {
   meal: Meal | null;
+  signedInUserEmail: string | null | undefined;
+  signedInUserID: number | null;
 }
 
 export default function RecipeRandom(props: RandomRecipeProps): JSX.Element {
   const [meal, setMeal] = useState(props.meal);
+  const [fetchedRating, setFetchedRating] = useState<number | null>(null);
 
   const fetchRandomMeal = useCallback(async () => {
     const response = await fetch(
@@ -25,10 +29,25 @@ export default function RecipeRandom(props: RandomRecipeProps): JSX.Element {
 
   return (
     <div className="ctn-random-recipe">
-      <button className="btn-new-random-meal" onClick={() => fetchRandomMeal()}>
+      <button
+        className="btn-new-random-meal"
+        onClick={() => {
+          setFetchedRating(null);
+          fetchRandomMeal();
+        }}
+      >
         new random meal
       </button>
-      <Recipe meal={meal} />
+      {props.signedInUserEmail ? (
+        <FullRecipe
+          meal={meal}
+          signedInUserID={props.signedInUserID}
+          fetchedRating={fetchedRating}
+          setFetchedRating={setFetchedRating}
+        />
+      ) : (
+        <RecipeNoUserSignedIn meal={meal} />
+      )}
     </div>
   );
 }
