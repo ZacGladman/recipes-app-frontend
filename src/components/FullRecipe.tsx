@@ -124,13 +124,23 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
             <MdAddComment className="recipe-review-btn-icon" />
             write a review
           </button>
-          <button
-            className="recipe-add-to-cooklist-btn"
-            onClick={() => window.alert("not yet implemented")}
-          >
-            <MdOutlinePlaylistAdd className="add-to-cooklist-icon" />
-            add to cooklist
-          </button>
+          {cooklistID ? (
+            <button
+              className="recipe-add-to-cooklist-btn"
+              onClick={handleRemoveFromCooklistClicked}
+            >
+              <MdOutlinePlaylistAdd className="add-to-cooklist-icon" />
+              remove from cooklist
+            </button>
+          ) : (
+            <button
+              className="recipe-add-to-cooklist-btn"
+              onClick={handleAddToCooklistClicked}
+            >
+              <MdOutlinePlaylistAdd className="add-to-cooklist-icon" />
+              add to cooklist
+            </button>
+          )}
         </div>
         {meal.strMealThumb && (
           <img src={meal.strMealThumb} alt="" className="recipe-image" />
