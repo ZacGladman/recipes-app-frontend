@@ -5,13 +5,16 @@ import FullRecipe from "../components/FullRecipe";
 import RecipeNoUserSignedIn from "../components/RecipeNoSignedInUser";
 
 interface IRecipeWithParams {
-  signedInUserID: string | null | undefined;
+  signedInUserEmail: string | null | undefined;
+  signedInUserID: number | null;
 }
 
 export default function RecipeWithParams({
+  signedInUserEmail,
   signedInUserID,
 }: IRecipeWithParams): JSX.Element {
   const [meal, setMeal] = useState<Meal>();
+  const [fetchedRating, setFetchedRating] = useState<number | null>(null);
 
   const { id } = useParams();
   const endpoint = "https://themealdb.com/api/json/v1/1/lookup.php?i=" + id;
@@ -26,8 +29,13 @@ export default function RecipeWithParams({
   }, [endpoint]);
 
   if (meal) {
-    return signedInUserID ? (
-      <FullRecipe meal={meal} />
+    return signedInUserEmail ? (
+      <FullRecipe
+        meal={meal}
+        signedInUserID={signedInUserID}
+        fetchedRating={fetchedRating}
+        setFetchedRating={setFetchedRating}
+      />
     ) : (
       <RecipeNoUserSignedIn meal={meal} />
     );
