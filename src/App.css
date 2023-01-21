@@ -58,7 +58,8 @@ button {
   grid-row: 1;
 }
 
-.navbar-link:hover,
+.mealsearch-link:hover,
+.reviews-link:hover,
 .btn-sign-in:hover,
 .btn-sign-out:hover {
   color: rgba(210, 210, 210, 0.983);
