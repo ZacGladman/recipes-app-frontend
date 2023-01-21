@@ -13,6 +13,7 @@ import { auth, googleAuthProvider } from "./configureFirebase";
 import { signInWithPopup } from "firebase/auth";
 import axios from "axios";
 import { baseURL } from ".";
+import Cooklist from "./Pages/Cooklist";
 
 function App(): JSX.Element {
   const [signedInUserID, setSignedInUserID] = useState<number | null>(null);
@@ -83,10 +84,21 @@ function App(): JSX.Element {
           >
             meal search
           </NavLink>
+
           {signedInUserEmail && (
-            <button className="btn-sign-out" onClick={handleSignOutClicked}>
-              sign out
-            </button>
+            <>
+              <NavLink
+                to={`/users/${signedInUserID}/cooklist`}
+                className={({ isActive }) =>
+                  isActive ? "active-mealsearch-link" : "mealsearch-link"
+                }
+              >
+                cooklist
+              </NavLink>
+              <button className="btn-sign-out" onClick={handleSignOutClicked}>
+                sign out
+              </button>
+            </>
           )}
         </div>
       </nav>
@@ -135,6 +147,12 @@ function App(): JSX.Element {
           path="/meal-search/nationality/:nation"
           element={<MealsByNation setNavSelection={setNavSelection} />}
         />
+        {signedInUserName && (
+          <Route
+            path="/users/:userID/cooklist"
+            element={<Cooklist username={signedInUserName} />}
+          />
+        )}
       </Routes>
     </>
   );
