@@ -15,7 +15,8 @@ import axios from "axios";
 import { baseURL } from ".";
 
 function App(): JSX.Element {
-  const [signedInUserID, setSignedInUserID] = useState<string | null>();
+  const [signedInUserID, setSignedInUserID] = useState<number | null>(null);
+  const [signedInUserEmail, setSignedInUserEmail] = useState<string | null>();
   const [signedInUserImg, setSignedInUserImg] = useState<string | null>();
   const [signedInUserName, setSignedInUserName] = useState<string | null>();
   const [selectedMeal, setSelectedMeal] = useState<Meal | null>(null);
