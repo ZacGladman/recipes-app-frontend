@@ -3,7 +3,7 @@ import createIngredientsAndQuantsArray from "../utils/createIngredientsAndQuants
 import { Link } from "react-router-dom";
 import createInstructionsParagraph from "../utils/createInstructionsParagraph";
 import { Rating } from "react-simple-star-rating";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import { baseURL } from "../index";
 
@@ -13,10 +13,6 @@ interface RecipeProps {
 
 export default function RecipeNoUserSignedIn(props: RecipeProps): JSX.Element {
   const meal = props.meal;
-  const [rating, setRating] = useState(0);
-  const handleRating = (rate: number) => {
-    setRating(rate);
-  };
 
   useEffect(() => {
     const postRecipeToDB = async () => {
@@ -43,7 +39,7 @@ export default function RecipeNoUserSignedIn(props: RecipeProps): JSX.Element {
         <div className="ctn-recipe-avg-rating-and-tags-no-user">
           <p className="recipe-avg-rating-text">average rating</p>
           <Rating
-            onClick={handleRating}
+            initialValue={0}
             allowFraction={true}
             readonly={true}
             className="recipe-avg-rating"
