@@ -25,8 +25,7 @@ function App(): JSX.Element {
   const handleSignInClicked = async () => {
     const userCredential = await signInWithPopup(auth, googleAuthProvider);
     const signedInUser = userCredential.user;
-    console.log(signedInUser);
-    setSignedInUserID(signedInUser.email);
+    setSignedInUserEmail(signedInUser.email);
     setSignedInUserImg(signedInUser.photoURL);
     setSignedInUserName(signedInUser.displayName);
     const postBody = {
