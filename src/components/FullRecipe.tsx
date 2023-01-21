@@ -15,9 +15,12 @@ interface RecipeProps {
 
 export default function FullRecipe(props: RecipeProps): JSX.Element {
   const meal = props.meal;
-  const [rating, setRating] = useState(0);
-  const handleRating = (rate: number) => {
-    setRating(rate);
+  const handleRating = async (rate: number) => {
+    await axios.post(
+      `${baseURL}/reviews/new-quick/recipe/${meal?.idMeal}/user/${signedInUserID}`,
+      { rating_value: rate }
+    );
+  };
   };
 
   useEffect(() => {
