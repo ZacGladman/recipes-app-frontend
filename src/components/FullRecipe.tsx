@@ -11,10 +11,15 @@ import { baseURL } from "../index";
 
 interface RecipeProps {
   meal: Meal | null;
+  signedInUserID: number | null;
+  fetchedRating: number | null;
+  setFetchedRating: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 export default function FullRecipe(props: RecipeProps): JSX.Element {
   const meal = props.meal;
+  const signedInUserID = props.signedInUserID;
+  const [cooklistID, setCooklistID] = useState<number | null>(null);
   const handleRating = async (rate: number) => {
     await axios.post(
       `${baseURL}/reviews/new-quick/recipe/${meal?.idMeal}/user/${signedInUserID}`,
@@ -63,7 +68,9 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
       await axios.post(`${baseURL}/recipes`, body);
     };
     postRecipeToDB();
-  }, [meal?.idMeal, meal?.strMeal, meal?.strMealThumb]);
+    fetchCooklistStatus();
+    fetchRating();
+  }, [meal?.idMeal, meal?.strMeal, meal?.strMealThumb, signedInUserID, props]);
 
   if (meal) {
     const ingredientsAndQuantsArray = createIngredientsAndQuantsArray(meal);
@@ -78,7 +85,6 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
         <div className="ctn-recipe-avg-rating-and-tags">
           <p className="recipe-avg-rating-text">average rating</p>
           <Rating
-            onClick={handleRating}
             allowFraction={true}
             readonly={true}
             className="recipe-avg-rating"
@@ -116,6 +122,7 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
               fillColor={"#878787fb"}
             />
           )}
+
           <p className="recipe-rate">quick rate</p>
           <button
             className="recipe-review-btn"
