@@ -33,21 +33,23 @@ function App(): JSX.Element {
       userEmail: signedInUser.email,
       profilePic: signedInUser.photoURL,
     };
-    await axios.post(`${baseURL}/users`, postBody);
+    const { data } = await axios.post(`${baseURL}/users`, postBody);
+    setSignedInUserID(data.user_id);
   };
 
   const handleSignOutClicked = async () => {
     await auth.signOut();
-    setSignedInUserID(null);
+    setSignedInUserEmail(null);
     setSignedInUserImg(null);
     setSignedInUserName(null);
+    setSignedInUserID(null);
   };
   return (
     <>
       <nav className="navbar-upper">
         <p className="page-title">chefbook</p>
         <div className="nav-bar-subtitles">
-          {!signedInUserID && (
+          {!signedInUserEmail && (
             <button className="btn-sign-in" onClick={handleSignInClicked}>
               sign in
             </button>
@@ -81,7 +83,7 @@ function App(): JSX.Element {
           >
             meal search
           </NavLink>
-          {signedInUserID && (
+          {signedInUserEmail && (
             <button className="btn-sign-out" onClick={handleSignOutClicked}>
               sign out
             </button>
@@ -108,12 +110,21 @@ function App(): JSX.Element {
         />
         <Route
           path="/meal-search/:id"
-          element={<RecipeWithParams signedInUserID={signedInUserID} />}
+          element={
+            <RecipeWithParams
+              signedInUserEmail={signedInUserEmail}
+              signedInUserID={signedInUserID}
+            />
+          }
         />
         <Route
           path="/meal-search/random"
           element={
-            <RecipeRandom meal={selectedMeal} signedInUserID={signedInUserID} />
+            <RecipeRandom
+              meal={selectedMeal}
+              signedInUserEmail={signedInUserEmail}
+              signedInUserID={signedInUserID}
+            />
           }
         />
         <Route
