@@ -21,6 +21,15 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
       { rating_value: rate }
     );
   };
+  const handleAddToCooklistClicked = async () => {
+    const { data } = await axios.post(
+      `${baseURL}/user/${signedInUserID}/cooklist/new`,
+      {
+        recipe_api_id: meal?.idMeal,
+      }
+    );
+    setCooklistID(data.cooklist_id);
+  };
   };
 
   useEffect(() => {
