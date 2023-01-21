@@ -99,12 +99,23 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
           </div>
         </div>
         <div className="recipe-actions-sidebox">
-          <Rating
-            onClick={handleRating}
-            allowFraction={true}
-            className="recipe-rating-input"
-            fillColor={"#9545c1"}
-          />
+          {props.fetchedRating ? (
+            <Rating
+              initialValue={props.fetchedRating}
+              onClick={handleRating}
+              allowFraction={true}
+              className="recipe-rating-input"
+              fillColor={"#9545c1"}
+            />
+          ) : (
+            <Rating
+              initialValue={0}
+              onClick={handleRating}
+              allowFraction={true}
+              className="recipe-rating-input"
+              fillColor={"#878787fb"}
+            />
+          )}
           <p className="recipe-rate">quick rate</p>
           <button
             className="recipe-review-btn"
