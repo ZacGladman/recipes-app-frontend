@@ -40,6 +40,24 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
     setCooklistID(null);
   };
 
+  const handleReviewSubmitClicked = async () => {
+    if (fullReviewRating && reviewText.length > 0) {
+      await axios.post(
+        `${baseURL}/reviews/new-full/recipe/${meal?.idMeal}/user/${signedInUserID}`,
+        { rating_value: fullReviewRating, review: reviewText }
+      );
+      setOpen(false);
+      setReviewText("");
+    } else {
+      window.alert("missing fields in your review!");
+    }
+  };
+  // "/reviews/new-full/recipe/:recipeID/user/:userID",
+  // async (req, res) => {
+  //   try {
+  //     const { recipeID, userID } = req.params;
+  //     const { rating_value, review } = req.body;
+
   useEffect(() => {
     const fetchCooklistStatus = async () => {
       const { data } = await axios.get(
