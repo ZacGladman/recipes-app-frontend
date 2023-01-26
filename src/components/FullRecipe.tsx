@@ -8,6 +8,7 @@ import { MdOutlinePlaylistAdd } from "react-icons/md";
 import { MdAddComment } from "react-icons/md";
 import axios from "axios";
 import { baseURL } from "../index";
+import Popup from "reactjs-popup";
 
 interface RecipeProps {
   meal: Meal | null;
@@ -20,6 +21,11 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
   const meal = props.meal;
   const signedInUserID = props.signedInUserID;
   const [cooklistID, setCooklistID] = useState<number | null>(null);
+  const [open, setOpen] = useState(false);
+  const [reviewText, setReviewText] = useState<string>("");
+  const [preexistingReview, setPreexistingReview] = useState<string>();
+  const [fullReviewRating, setFullReviewRating] = useState<number | null>(null);
+  const closeModal = () => setOpen(false);
   const handleRating = async (rate: number) => {
     await axios.post(
       `${baseURL}/reviews/new-quick/recipe/${meal?.idMeal}/user/${signedInUserID}`,
@@ -73,6 +79,7 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
       );
       if (data.length > 0) {
         props.setFetchedRating(Number(data[0].rating_value));
+        setPreexistingReview(data[0].review);
       } else {
         props.setFetchedRating(null);
       }
@@ -84,7 +91,7 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
         recipe_img_url: meal?.strMealThumb,
       };
       if (meal) {
-      await axios.post(`${baseURL}/recipes`, body);
+        await axios.post(`${baseURL}/recipes`, body);
       }
     };
 
@@ -153,12 +160,12 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
 
           <p className="recipe-rate">quick rate</p>
           <div>
-          <button
+            <button
               type="button"
-            className="recipe-review-btn"
+              className="recipe-review-btn"
               onClick={() => setOpen((o) => !o)}
-          >
-            <MdAddComment className="recipe-review-btn-icon" />
+            >
+              <MdAddComment className="recipe-review-btn-icon" />
               {preexistingReview ? "edit your review" : "write a review"}
             </button>
             <Popup
@@ -188,7 +195,7 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
                   onClick={handleReviewSubmitClicked}
                 >
                   submit
-          </button>
+                </button>
               </div>
             </Popup>
           </div>
