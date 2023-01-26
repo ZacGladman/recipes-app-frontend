@@ -152,13 +152,46 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
           )}
 
           <p className="recipe-rate">quick rate</p>
+          <div>
           <button
+              type="button"
             className="recipe-review-btn"
-            onClick={() => window.alert("not yet implemented")}
+              onClick={() => setOpen((o) => !o)}
           >
             <MdAddComment className="recipe-review-btn-icon" />
-            write a review
+              {preexistingReview ? "edit your review" : "write a review"}
+            </button>
+            <Popup
+              open={open}
+              closeOnDocumentClick
+              onClose={closeModal}
+              className="pop-up-form"
+            >
+              <div className="pop-up-content">
+                <p className="pop-up-meal-title">{meal.strMeal}</p>
+                <Rating
+                  initialValue={props.fetchedRating ?? 0}
+                  onClick={(rate) => setFullReviewRating(rate)}
+                  allowFraction={true}
+                  className="recipe-rating-input"
+                  fillColor={"#ffd700"}
+                />
+                <textarea
+                  className="pop-up-text-input"
+                  cols={30}
+                  rows={10}
+                  value={preexistingReview ?? reviewText}
+                  onChange={(e) => setReviewText(e.target.value)}
+                ></textarea>
+                <button
+                  className="pop-up-submit-button"
+                  onClick={handleReviewSubmitClicked}
+                >
+                  submit
           </button>
+              </div>
+            </Popup>
+          </div>
           {cooklistID ? (
             <button
               className="recipe-add-to-cooklist-btn"
