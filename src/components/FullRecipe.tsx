@@ -83,12 +83,22 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
         recipe_name: meal?.strMeal,
         recipe_img_url: meal?.strMealThumb,
       };
+      if (meal) {
       await axios.post(`${baseURL}/recipes`, body);
+      }
     };
+
     postRecipeToDB();
     fetchCooklistStatus();
     fetchRating();
-  }, [meal?.idMeal, meal?.strMeal, meal?.strMealThumb, signedInUserID, props]);
+  }, [
+    meal,
+    meal?.idMeal,
+    meal?.strMeal,
+    meal?.strMealThumb,
+    signedInUserID,
+    props,
+  ]);
 
   if (meal) {
     const ingredientsAndQuantsArray = createIngredientsAndQuantsArray(meal);
