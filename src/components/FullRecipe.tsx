@@ -3,11 +3,12 @@ import createIngredientsAndQuantsArray from "../utils/createIngredientsAndQuants
 import { Link } from "react-router-dom";
 import createInstructionsParagraph from "../utils/createInstructionsParagraph";
 import { Rating } from "react-simple-star-rating";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { MdOutlinePlaylistAdd } from "react-icons/md";
 import { MdAddComment } from "react-icons/md";
 import axios from "axios";
 import { baseURL } from "../index";
+import Popup from "reactjs-popup";
 
 interface RecipeProps {
   meal: Meal | null;
@@ -16,10 +17,21 @@ interface RecipeProps {
   setFetchedRating: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
+interface IAvgRating {
+  avg: number;
+  count: number;
+}
+
 export default function FullRecipe(props: RecipeProps): JSX.Element {
   const meal = props.meal;
   const signedInUserID = props.signedInUserID;
+  const [avgRating, setAvgRating] = useState<IAvgRating | null>(null);
   const [cooklistID, setCooklistID] = useState<number | null>(null);
+  const [open, setOpen] = useState(false);
+  const [reviewText, setReviewText] = useState<string>("");
+  const [preexistingReview, setPreexistingReview] = useState<string>();
+  const [fullReviewRating, setFullReviewRating] = useState<number | null>(null);
+  const closeModal = () => setOpen(false);
   const handleRating = async (rate: number) => {
     await axios.post(
       `${baseURL}/reviews/new-quick/recipe/${meal?.idMeal}/user/${signedInUserID}`,
@@ -40,7 +52,53 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
     setCooklistID(null);
   };
 
+  const handleReviewSubmitClicked = async () => {
+    if (fullReviewRating && reviewText.length > 0) {
+      await axios.post(
+        `${baseURL}/reviews/new-full/recipe/${meal?.idMeal}/user/${signedInUserID}`,
+        { rating_value: fullReviewRating, review: reviewText }
+      );
+      setOpen(false);
+      setReviewText("");
+      fetchRating();
+    } else {
+      window.alert("missing fields in your review!");
+    }
+  };
+  // "/reviews/new-full/recipe/:recipeID/user/:userID",
+  // async (req, res) => {
+  //   try {
+  //     const { recipeID, userID } = req.params;
+  //     const { rating_value, review } = req.body;
+
+  const fetchRating = useCallback(async () => {
+    const { data } = await axios.get(
+      `${baseURL}/reviews/recipe/${meal?.idMeal}/user/${signedInUserID}`
+    );
+    if (data.length > 0) {
+      props.setFetchedRating(Number(data[0].rating_value));
+      setPreexistingReview(data[0].review);
+    } else {
+      props.setFetchedRating(null);
+    }
+  }, [meal?.idMeal, props, signedInUserID]);
+
   useEffect(() => {
+    const fetchAvgRating = async () => {
+      const response = await fetch(
+        `${baseURL}/reviews/recipe/${props.meal?.idMeal}/avg-rating`
+      );
+      const ratingJSON = await response.json();
+      console.log(ratingJSON);
+      if (ratingJSON.length > 0) {
+        const avgRating = ratingJSON[0].avg;
+        const roundedRating = Math.round(avgRating * 2) / 2;
+        const count = Number(ratingJSON[0].count);
+        setAvgRating({ avg: roundedRating, count: count });
+      } else {
+        setAvgRating(null);
+      }
+    };
     const fetchCooklistStatus = async () => {
       const { data } = await axios.get(
         `${baseURL}/user/${signedInUserID}/cooklist/recipe/${meal?.idMeal}`
@@ -49,28 +107,29 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
         setCooklistID(data[0].cooklist_id);
       }
     };
-    const fetchRating = async () => {
-      const { data } = await axios.get(
-        `${baseURL}/reviews/recipe/${meal?.idMeal}/user/${signedInUserID}`
-      );
-      if (data.length > 0) {
-        props.setFetchedRating(Number(data[0].rating_value));
-      } else {
-        props.setFetchedRating(null);
-      }
-    };
     const postRecipeToDB = async () => {
       const body = {
         recipe_api_id: meal?.idMeal,
         recipe_name: meal?.strMeal,
         recipe_img_url: meal?.strMealThumb,
       };
-      await axios.post(`${baseURL}/recipes`, body);
+      if (meal) {
+        await axios.post(`${baseURL}/recipes`, body);
+      }
     };
+    fetchAvgRating();
     postRecipeToDB();
     fetchCooklistStatus();
     fetchRating();
-  }, [meal?.idMeal, meal?.strMeal, meal?.strMealThumb, signedInUserID, props]);
+  }, [
+    fetchRating,
+    meal,
+    meal?.idMeal,
+    meal?.strMeal,
+    meal?.strMealThumb,
+    signedInUserID,
+    props,
+  ]);
 
   if (meal) {
     const ingredientsAndQuantsArray = createIngredientsAndQuantsArray(meal);
@@ -83,12 +142,20 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
           <p className="recipe-title">{meal.strMeal}</p>
         </div>
         <div className="ctn-recipe-avg-rating-and-tags">
-          <p className="recipe-avg-rating-text">average rating</p>
-          <Rating
-            allowFraction={true}
-            readonly={true}
-            className="recipe-avg-rating"
-          />
+          {avgRating && (
+            <>
+              <p className="recipe-avg-rating-text">average rating</p>
+              <Rating
+                initialValue={avgRating.avg}
+                allowFraction={true}
+                readonly={true}
+                className="recipe-avg-rating"
+              />
+              <p>
+                {avgRating.count} {avgRating.count === 1 ? "review" : "reviews"}
+              </p>
+            </>
+          )}
           <div className="ctn-recipe-tags">
             <Link
               to={`../meal-search/categories/${meal.strCategory}`}
@@ -124,13 +191,46 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
           )}
 
           <p className="recipe-rate">quick rate</p>
-          <button
-            className="recipe-review-btn"
-            onClick={() => window.alert("not yet implemented")}
-          >
-            <MdAddComment className="recipe-review-btn-icon" />
-            write a review
-          </button>
+          <div>
+            <button
+              type="button"
+              className="recipe-review-btn"
+              onClick={() => setOpen((o) => !o)}
+            >
+              <MdAddComment className="recipe-review-btn-icon" />
+              {preexistingReview ? "edit your review" : "write a review"}
+            </button>
+            <Popup
+              open={open}
+              closeOnDocumentClick
+              onClose={closeModal}
+              className="pop-up-form"
+            >
+              <div className="pop-up-content">
+                <p className="pop-up-meal-title">{meal.strMeal}</p>
+                <Rating
+                  initialValue={props.fetchedRating ?? 0}
+                  onClick={(rate) => setFullReviewRating(rate)}
+                  allowFraction={true}
+                  className="recipe-rating-input"
+                  fillColor={"#ffd700"}
+                />
+                <textarea
+                  className="pop-up-text-input"
+                  cols={30}
+                  rows={10}
+                  value={preexistingReview ?? reviewText}
+                  onChange={(e) => setReviewText(e.target.value)}
+                ></textarea>
+                <button
+                  className="pop-up-submit-button"
+                  onClick={handleReviewSubmitClicked}
+                >
+                  submit
+                </button>
+              </div>
+            </Popup>
+          </div>
           {cooklistID ? (
             <button
               className="recipe-add-to-cooklist-btn"

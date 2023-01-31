@@ -18,7 +18,9 @@ export default function RecipeRandom(props: RandomRecipeProps): JSX.Element {
       "https://www.themealdb.com/api/json/v1/1/random.php"
     );
     const randomMeal: { meals: Meal[] } = await response.json();
-    setMeal(randomMeal.meals[0]);
+    if (randomMeal.meals[0].idMeal) {
+      setMeal(randomMeal.meals[0]);
+    }
   }, [setMeal]);
 
   useEffect(() => {

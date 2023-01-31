@@ -315,6 +315,55 @@ button {
   margin-block-end: 0.3rem;
 }
 
+.pop-up-form {
+  margin: auto;
+  background: rgb(255, 255, 255);
+  width: 50%;
+  padding: 5px;
+}
+.pop-up-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #9545c1;
+  color: white;
+  width: 100%;
+  padding: 5px;
+  margin: auto;
+  border: solid black 0.25rem;
+}
+
+.pop-up-text-input {
+  width: 40rem;
+  text-align: left;
+  min-height: 20rem;
+  justify-self: start;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.25rem;
+  margin: 1rem 1rem 1rem 1rem;
+  line-height: 1.75rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1rem;
+}
+
+.pop-up-submit-button {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.pop-up-meal-title {
+  font-size: 2rem;
+  margin-bottom: 0.1rem;
+}
+
+.pop-up-close {
+  font-size: 1.15rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
 /* ======================================RECIPE SIDEBOX */
 .recipe-actions-sidebox {
   display: flex;
