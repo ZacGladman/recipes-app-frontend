@@ -17,6 +17,11 @@ interface RecipeProps {
   setFetchedRating: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
+interface IAvgRating {
+  avg: number;
+  count: number;
+}
+
 export default function FullRecipe(props: RecipeProps): JSX.Element {
   const meal = props.meal;
   const signedInUserID = props.signedInUserID;
