@@ -99,15 +99,12 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
         setAvgRating(null);
       }
     };
-    const fetchRating = async () => {
+    const fetchCooklistStatus = async () => {
       const { data } = await axios.get(
-        `${baseURL}/reviews/recipe/${meal?.idMeal}/user/${signedInUserID}`
+        `${baseURL}/user/${signedInUserID}/cooklist/recipe/${meal?.idMeal}`
       );
       if (data.length > 0) {
-        props.setFetchedRating(Number(data[0].rating_value));
-        setPreexistingReview(data[0].review);
-      } else {
-        props.setFetchedRating(null);
+        setCooklistID(data[0].cooklist_id);
       }
     };
     const postRecipeToDB = async () => {
