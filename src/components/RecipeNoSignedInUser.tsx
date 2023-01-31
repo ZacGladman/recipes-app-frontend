@@ -59,13 +59,20 @@ export default function RecipeNoUserSignedIn(props: RecipeProps): JSX.Element {
           <p className="recipe-title">{meal.strMeal}</p>
         </div>
         <div className="ctn-recipe-avg-rating-and-tags-no-user">
+          {avgRating && (
+            <>
           <p className="recipe-avg-rating-text">average rating</p>
           <Rating
-            initialValue={0}
+                initialValue={avgRating.avg}
             allowFraction={true}
             readonly={true}
             className="recipe-avg-rating"
           />
+              <p>
+                {avgRating.count} {avgRating.count === 1 ? "review" : "reviews"}
+              </p>
+            </>
+          )}
           <div className="ctn-recipe-tags">
             <Link
               to={`../meal-search/categories/${meal.strCategory}`}
