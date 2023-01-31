@@ -83,6 +83,20 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
     }
   }, [meal?.idMeal, props, signedInUserID]);
 
+  useEffect(() => {
+    const fetchAvgRating = async () => {
+      const response = await fetch(
+        `${baseURL}/reviews/recipe/${props.meal?.idMeal}/avg-rating`
+      );
+      const ratingJSON = await response.json();
+      console.log(ratingJSON);
+      if (ratingJSON.length > 0) {
+        const avgRating = ratingJSON[0].avg;
+        const roundedRating = Math.round(avgRating * 2) / 2;
+        const count = Number(ratingJSON[0].count);
+        setAvgRating({ avg: roundedRating, count: count });
+      } else {
+        setAvgRating(null);
       }
     };
     const fetchRating = async () => {
