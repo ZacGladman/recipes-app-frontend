@@ -60,6 +60,7 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
       );
       setOpen(false);
       setReviewText("");
+      fetchRating();
     } else {
       window.alert("missing fields in your review!");
     }
