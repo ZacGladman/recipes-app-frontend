@@ -29,8 +29,24 @@ export default function RecipeNoUserSignedIn(props: RecipeProps): JSX.Element {
       };
       await axios.post(`${baseURL}/recipes`, body);
     };
+    const fetchAvgRating = async () => {
+      const response = await fetch(
+        `${baseURL}/reviews/recipe/${props.meal?.idMeal}/avg-rating`
+      );
+      const ratingJSON = await response.json();
+      console.log(ratingJSON);
+      if (ratingJSON.length > 0) {
+        const avgRating = ratingJSON[0].avg;
+        const roundedRating = Math.round(avgRating * 2) / 2;
+        const count = Number(ratingJSON[0].count);
+        setAvgRating({ avg: roundedRating, count: count });
+      } else {
+        setAvgRating(null);
+      }
+    };
+    fetchAvgRating();
     postRecipeToDB();
-  }, [meal?.idMeal, meal?.strMeal, meal?.strMealThumb]);
+  }, [meal?.idMeal, meal?.strMeal, meal?.strMealThumb, props.meal?.idMeal]);
 
   if (meal) {
     const ingredientsAndQuantsArray = createIngredientsAndQuantsArray(meal);
