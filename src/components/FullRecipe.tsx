@@ -147,6 +147,11 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
             readonly={true}
             className="recipe-avg-rating"
           />
+              <p>
+                {avgRating.count} {avgRating.count === 1 ? "review" : "reviews"}
+              </p>
+            </>
+          )}
           <div className="ctn-recipe-tags">
             <Link
               to={`../meal-search/categories/${meal.strCategory}`}
