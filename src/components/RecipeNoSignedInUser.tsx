@@ -18,6 +18,7 @@ interface IAvgRating {
 
 export default function RecipeNoUserSignedIn(props: RecipeProps): JSX.Element {
   const meal = props.meal;
+  const [avgRating, setAvgRating] = useState<IAvgRating | null>(null);
 
   useEffect(() => {
     const postRecipeToDB = async () => {
