@@ -3,7 +3,7 @@ import createIngredientsAndQuantsArray from "../utils/createIngredientsAndQuants
 import { Link } from "react-router-dom";
 import createInstructionsParagraph from "../utils/createInstructionsParagraph";
 import { Rating } from "react-simple-star-rating";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { MdOutlinePlaylistAdd } from "react-icons/md";
 import { MdAddComment } from "react-icons/md";
 import axios from "axios";
@@ -72,10 +72,10 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
   //     const { rating_value, review } = req.body;
 
   const fetchRating = useCallback(async () => {
-      const { data } = await axios.get(
+    const { data } = await axios.get(
       `${baseURL}/reviews/recipe/${meal?.idMeal}/user/${signedInUserID}`
-      );
-      if (data.length > 0) {
+    );
+    if (data.length > 0) {
       props.setFetchedRating(Number(data[0].rating_value));
       setPreexistingReview(data[0].review);
     } else {
@@ -117,11 +117,12 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
         await axios.post(`${baseURL}/recipes`, body);
       }
     };
-
+    fetchAvgRating();
     postRecipeToDB();
     fetchCooklistStatus();
     fetchRating();
   }, [
+    fetchRating,
     meal,
     meal?.idMeal,
     meal?.strMeal,
@@ -143,13 +144,13 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
         <div className="ctn-recipe-avg-rating-and-tags">
           {avgRating && (
             <>
-          <p className="recipe-avg-rating-text">average rating</p>
-          <Rating
+              <p className="recipe-avg-rating-text">average rating</p>
+              <Rating
                 initialValue={avgRating.avg}
-            allowFraction={true}
-            readonly={true}
-            className="recipe-avg-rating"
-          />
+                allowFraction={true}
+                readonly={true}
+                className="recipe-avg-rating"
+              />
               <p>
                 {avgRating.count} {avgRating.count === 1 ? "review" : "reviews"}
               </p>
