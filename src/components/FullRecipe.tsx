@@ -25,6 +25,7 @@ interface IAvgRating {
 export default function FullRecipe(props: RecipeProps): JSX.Element {
   const meal = props.meal;
   const signedInUserID = props.signedInUserID;
+  const [avgRating, setAvgRating] = useState<IAvgRating | null>(null);
   const [cooklistID, setCooklistID] = useState<number | null>(null);
   const [open, setOpen] = useState(false);
   const [reviewText, setReviewText] = useState<string>("");
