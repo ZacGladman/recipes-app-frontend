@@ -70,13 +70,18 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
   //     const { recipeID, userID } = req.params;
   //     const { rating_value, review } = req.body;
 
-  useEffect(() => {
-    const fetchCooklistStatus = async () => {
+  const fetchRating = useCallback(async () => {
       const { data } = await axios.get(
-        `${baseURL}/user/${signedInUserID}/cooklist/recipe/${meal?.idMeal}`
+      `${baseURL}/reviews/recipe/${meal?.idMeal}/user/${signedInUserID}`
       );
       if (data.length > 0) {
-        setCooklistID(data[0].cooklist_id);
+      props.setFetchedRating(Number(data[0].rating_value));
+      setPreexistingReview(data[0].review);
+    } else {
+      props.setFetchedRating(null);
+    }
+  }, [meal?.idMeal, props, signedInUserID]);
+
       }
     };
     const fetchRating = async () => {
