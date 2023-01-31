@@ -141,8 +141,11 @@ export default function FullRecipe(props: RecipeProps): JSX.Element {
           <p className="recipe-title">{meal.strMeal}</p>
         </div>
         <div className="ctn-recipe-avg-rating-and-tags">
+          {avgRating && (
+            <>
           <p className="recipe-avg-rating-text">average rating</p>
           <Rating
+                initialValue={avgRating.avg}
             allowFraction={true}
             readonly={true}
             className="recipe-avg-rating"
