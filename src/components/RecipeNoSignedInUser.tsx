@@ -3,7 +3,7 @@ import createIngredientsAndQuantsArray from "../utils/createIngredientsAndQuants
 import { Link } from "react-router-dom";
 import createInstructionsParagraph from "../utils/createInstructionsParagraph";
 import { Rating } from "react-simple-star-rating";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { baseURL } from "../index";
 
@@ -61,13 +61,13 @@ export default function RecipeNoUserSignedIn(props: RecipeProps): JSX.Element {
         <div className="ctn-recipe-avg-rating-and-tags-no-user">
           {avgRating && (
             <>
-          <p className="recipe-avg-rating-text">average rating</p>
-          <Rating
+              <p className="recipe-avg-rating-text">average rating</p>
+              <Rating
                 initialValue={avgRating.avg}
-            allowFraction={true}
-            readonly={true}
-            className="recipe-avg-rating"
-          />
+                allowFraction={true}
+                readonly={true}
+                className="recipe-avg-rating"
+              />
               <p>
                 {avgRating.count} {avgRating.count === 1 ? "review" : "reviews"}
               </p>
