@@ -6,6 +6,7 @@ export default function Reviews(): JSX.Element {
   const [tenNewestReviews, setTenNewestReviews] = useState<
     IReviewFromDB[] | null
   >(null);
+  console.log(tenNewestReviews);
   useEffect(() => {
     const fetch10NewestReviews = async () => {
       const response = await fetch(baseURL + "/reviews/newest-10");
