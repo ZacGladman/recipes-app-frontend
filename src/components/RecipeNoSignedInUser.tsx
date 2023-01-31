@@ -11,6 +11,11 @@ interface RecipeProps {
   meal: Meal | null;
 }
 
+interface IAvgRating {
+  avg: number;
+  count: number;
+}
+
 export default function RecipeNoUserSignedIn(props: RecipeProps): JSX.Element {
   const meal = props.meal;
 
