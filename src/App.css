@@ -619,3 +619,68 @@ button {
     background: #d7ac00;
   }
 }
+
+/* ======================================================================REVIEWS */
+
+.ctn-review-preview-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reviewer-pic {
+  border-radius: 50%;
+  height: 2rem;
+  margin-right: 0.5rem;
+}
+
+.carousel-nav-buttons {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.reviews-page-title {
+  text-align: center;
+  font-size: 3rem;
+  margin-top: 3rem;
+}
+
+.latest-reviews-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 4rem;
+}
+
+.ctn-review-previews {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: row;
+  margin-left: 5rem;
+  margin-top: 1rem;
+}
+
+.recipe-avg-rating {
+  margin-left: 0.5rem;
+}
+
+.highest-rated-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 4rem;
+}
+
+.ctn-AvgRatingMealPreview {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  flex-direction: column;
+}
+
+/* =============================================== COOKLIST */
+
+.cooklist-page-title {
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
