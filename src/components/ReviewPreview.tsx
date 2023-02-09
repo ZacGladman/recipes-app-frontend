@@ -20,14 +20,19 @@ export default function ReviewPreview({ review }: IReviewPreview): JSX.Element {
     <div className="ctn-single-meal-preview">
       <div className="ctn-review-preview-details">
         {review.profile_pic && (
-          <img src={review.profile_pic} alt="reviewer pic" />
+          <img
+            src={review.profile_pic}
+            alt="reviewer pic"
+            className="reviewer-pic"
+          />
         )}
-        <p>{review.username}</p>
+        <p className="review-preview-reviewer-name">{review.username}</p>
         <Rating
           initialValue={Number(review.rating_value)}
           allowFraction={true}
           readonly={true}
           className="recipe-avg-rating"
+          size={25}
         />
       </div>
       {review.recipe_img_url !== null && (
