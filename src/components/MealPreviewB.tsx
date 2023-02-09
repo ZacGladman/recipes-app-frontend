@@ -5,7 +5,7 @@ interface IMealPreview {
   meal: ICooklistMeal;
 }
 
-export default function MealPreviewA(props: IMealPreview): JSX.Element {
+export default function MealPreviewB(props: IMealPreview): JSX.Element {
   const meal = props.meal;
   const id = meal.recipe_api_id;
   return (

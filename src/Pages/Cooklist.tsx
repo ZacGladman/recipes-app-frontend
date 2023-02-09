@@ -24,7 +24,7 @@ export default function Cooklist({ username }: ICooklistProps): JSX.Element {
 
   return (
     <>
-      <h1>{username}'s CookList</h1>
+      <h1 className="cooklist-page-title">{username}'s CookList</h1>
       {cooklistMeals ? (
         <div className="ctn-meal-previews">
           {cooklistMeals.map((oneMeal) => {
