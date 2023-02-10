@@ -8,10 +8,10 @@ import groupIntoFours from "../utils/carouselSectionsCreator";
 import { BsCircleFill, BsCircle } from "react-icons/bs";
 
 export default function Reviews(): JSX.Element {
-  const [tenNewestReviews, setTenNewestReviews] = useState<
+  const [sixteenNewestReviews, setsixteenNewestReviews] = useState<
     IReviewFromDB[] | null
   >(null);
-  const [tenHighestRatedRecipes, setTenHighestRatedRecipes] = useState<
+  const [eightHighestRatedRecipes, seteightHighestRatedRecipes] = useState<
     IRecipeAvgRating[] | null
   >(null);
 
@@ -19,20 +19,20 @@ export default function Reviews(): JSX.Element {
     0 | 1 | 2 | 3
   >(0);
 
-  const newestReviewsCarouselSections = tenNewestReviews
-    ? groupIntoFours(tenNewestReviews)
+  const newestReviewsCarouselSections = sixteenNewestReviews
+    ? groupIntoFours(sixteenNewestReviews)
     : null;
 
   useEffect(() => {
     const fetch16NewestReviews = async () => {
       const response = await fetch(baseURL + "/reviews/newest-16");
       const newestReviews = await response.json();
-      setTenNewestReviews(newestReviews);
+      setsixteenNewestReviews(newestReviews);
     };
     const fetch8HighestRatedRecipes = async () => {
       const response = await fetch(baseURL + "/reviews/top-8-rated");
       const tenHighestRated = await response.json();
-      setTenHighestRatedRecipes(tenHighestRated);
+      seteightHighestRatedRecipes(tenHighestRated);
     };
     fetch16NewestReviews();
     fetch8HighestRatedRecipes();
@@ -76,8 +76,8 @@ export default function Reviews(): JSX.Element {
       </div>
       <p className="highest-rated-title">highest-rated recipes</p>
       <div className="ctn-meal-previews">
-        {tenHighestRatedRecipes &&
-          tenHighestRatedRecipes.map((oneRecipe) => (
+        {eightHighestRatedRecipes &&
+          eightHighestRatedRecipes.map((oneRecipe) => (
             <AvgRatingMealPreview
               key={oneRecipe.recipe_api_id}
               recipe={oneRecipe}
