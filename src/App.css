@@ -628,6 +628,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 17.5rem;
 }
 
 .reviewer-pic {
