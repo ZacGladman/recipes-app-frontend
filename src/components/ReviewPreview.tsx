@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
 import IReviewFromDB from "../utils/interfaces/IReviewFromDB";
 
@@ -35,14 +36,20 @@ export default function ReviewPreview({ review }: IReviewPreview): JSX.Element {
           size={25}
         />
       </div>
-      {review.recipe_img_url !== null && (
-        <img
-          src={review.recipe_img_url}
-          alt=""
-          className="single-meal-preview-image"
-        />
-      )}
-      <p className="single-meal-preview-title">{review.recipe_name}</p>
+      <Link
+        to={`/reviews/${review.review_id}`}
+        style={{ textDecoration: "none" }}
+        state={{ review: review }}
+      >
+        {review.recipe_img_url !== null && (
+          <img
+            src={review.recipe_img_url}
+            alt=""
+            className="single-meal-preview-image"
+          />
+        )}
+        <p className="single-meal-preview-title">{review.recipe_name}</p>
+      </Link>
     </div>
   );
 }
