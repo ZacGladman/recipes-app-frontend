@@ -14,6 +14,7 @@ import { signInWithPopup } from "firebase/auth";
 import axios from "axios";
 import { baseURL } from ".";
 import Cooklist from "./Pages/Cooklist";
+import SingleReview from "./Pages/SingleReview";
 
 function App(): JSX.Element {
   const [signedInUserID, setSignedInUserID] = useState<number | null>(null);
@@ -153,6 +154,7 @@ function App(): JSX.Element {
             element={<Cooklist username={signedInUserName} />}
           />
         )}
+        <Route path="reviews/:reviewID" element={<SingleReview />} />
       </Routes>
     </>
   );
