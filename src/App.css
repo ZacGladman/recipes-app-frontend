@@ -628,7 +628,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 17.5rem;
+  max-width: 17rem;
 }
 
 .reviewer-pic {
@@ -678,6 +678,76 @@ button {
   align-items: center;
   justify-items: center;
   flex-direction: column;
+}
+
+.ctn-single-review {
+  display: flex;
+  flex-direction: column;
+}
+
+.single-review-recipe-title {
+  text-align: center;
+  font-size: 3rem;
+}
+
+.single-review-recipe-image {
+  height: 30rem;
+}
+
+.single-review-button-to-full-recipe {
+  width: fit-content;
+  height: fit-content;
+  align-self: center;
+}
+
+.full-recipe-btn {
+  background-color: #9545c1;
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  margin-bottom: 3rem;
+}
+
+.full-recipe-btn:hover {
+  background-color: white;
+  color: #9545c1;
+}
+
+.ctn-single-review-body {
+  display: flex;
+  margin-left: 5rem;
+  margin-bottom: 3rem;
+  margin-right: 5rem;
+  align-items: left;
+}
+
+.ctn-reviewer-details-and-review {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 4rem;
+}
+
+.single-review-reviewer-details {
+  display: flex;
+  align-items: center;
+  margin-left: 3rem;
+}
+
+.single-review-reviewer-profile-pic {
+  border-radius: 50%;
+  height: 3rem;
+  margin-right: 1rem;
+}
+
+.single-review-reviewer-username {
+  font-size: 1.5rem;
+  color: rgb(90, 90, 90);
+}
+
+.single-review-text {
+  font-size: 1.5rem;
 }
 
 /* =============================================== COOKLIST */
