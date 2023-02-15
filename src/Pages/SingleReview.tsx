@@ -1,6 +1,4 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { MdOutlinePlaylistAdd } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
 import { baseURL } from "..";
