@@ -1,5 +1,7 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { MdOutlinePlaylistAdd } from "react-icons/md";
+import { Link, useParams } from "react-router-dom";
 import { Rating } from "react-simple-star-rating";
 import { baseURL } from "..";
 import IReviewFromDB from "../utils/interfaces/IReviewFromDB";
@@ -19,22 +21,48 @@ export default function SingleReview(): JSX.Element {
 
   if (review) {
     return (
-      <>
-        <p>{review.recipe_name}</p>
-        <img src={review.recipe_img_url} alt="recipe-pic" />
-        {review.profile_pic && (
-          <img src={review.profile_pic} alt="reviewer-profile-pic" />
-        )}
-        <p>{review.username}</p>
-        <p>{review.submission_time}</p>
-        <Rating
-          initialValue={Number(review.rating_value)}
-          allowFraction={true}
-          readonly={true}
-          className="recipe-avg-rating"
-        />
-        {review.review ? <p>{review.review}</p> : <p>no review written</p>}
-      </>
+      <div className="ctn-single-review">
+        <p className="single-review-recipe-title">{review.recipe_name}</p>
+        <Link
+          to={`../meal-search/${review.recipe_api_id}`}
+          style={{ textDecoration: "none" }}
+          className="single-review-button-to-full-recipe"
+        >
+          <button className="full-recipe-btn">full recipe</button>
+        </Link>
+        <div className="ctn-single-review-body">
+          <img
+            src={review.recipe_img_url}
+            alt="recipe-pic"
+            className="single-review-recipe-image"
+          />
+          <div className="ctn-reviewer-details-and-review">
+            <div className="single-review-reviewer-details">
+              {review.profile_pic && (
+                <img
+                  src={review.profile_pic}
+                  alt="reviewer-profile-pic"
+                  className="single-review-reviewer-profile-pic"
+                />
+              )}
+              <p className="single-review-reviewer-username">
+                Review by {review.username}
+              </p>
+            </div>
+            <Rating
+              initialValue={Number(review.rating_value)}
+              allowFraction={true}
+              readonly={true}
+              className="single-review-recipe-avg-rating"
+            />
+            {review.review ? (
+              <p className="single-review-text">{review.review}</p>
+            ) : (
+              <p className="single-review-text">no review written</p>
+            )}
+          </div>
+        </div>
+      </div>
     );
   } else {
     return <>fetching data</>;
